@@ -33,7 +33,7 @@ Required Software
 
 - `Arduino IDE <https://www.arduino.cc/en/main/software>`_
 - `XMC-for-Arduino <https://github.com/Infineon/XMC-for-Arduino>`_
-- `XENSIV™ 3D Magnetic Sensors TLx493D Arduino Library <test>`_
+- `XENSIV™ 3D Magnetic Sensors TLx493D Arduino Library <https://github.com/Infineon/arduino-xensiv-3d-magnetic-sensor-tlx493d.git>`_
 
 Software Installation
 ---------------------
