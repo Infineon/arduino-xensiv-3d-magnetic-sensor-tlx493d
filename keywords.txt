@@ -1,11 +1,41 @@
 # Syntax Coloring Map For ExampleLibrary
 
 # Datatypes (KEYWORD1)
-Test    KEYWORD1
+TLx493D_t                               KEYWORD1
+TLx493D_SupportedSensorType_t           KEYWORD1
 
 # Methods and Functions (KEYWORD2)
-doSomething KEYWORD2
+begin                                   KEYWORD2
+end                                     KEYWORD2
+setIICAddress                           KEYWORD2
+setPowerPin                             KEYWORD2
+setAddressPin                           KEYWORD2
+setSensitivity                          KEYWORD2
+setWakeUpThresholdsAsInteger            KEYWORD2
+setSelectPin                            KEYWORD2
+getTemperature                          KEYWORD2
+getMagneticField                        KEYWORD2
+getMagneticFieldAndTemperature          KEYWORD2
+getRawTemperature                       KEYWORD2
+printRegisters                          KEYWORD2
+enableWakeUpMode                        KEYWORD2
+enableInterrupt                         KEYWORD2
+
+tlx493d_init                            KEYWORD2    
+initCommunication                       KEYWORD2
+tlx493d_setDefaultConfig                KEYWORD2
+tlx493d_getMagneticFieldAndTemperature  KEYWORD2
+
+
 
 # Instances (KEYWORD2)
+TLx493D_A1B6                            KEYWORD2
+TLx493D_A2B6                            KEYWORD2
+TLx493D_A2BW                            KEYWORD2
+TLx493D_P2B6                            KEYWORD2
+TLx493D_W2B6                            KEYWORD2
+TLx493D_W2BW                            KEYWORD2
+TLx493D_P3B6                            KEYWORD2
+TLx493D_P3I8                            KEYWORD2
 
 # Constants (LITERAL1)

@@ -17,7 +17,7 @@ In order to install the library via the Arduino library manager open the Arduino
 .ZIP Library Installation
 -------------------------
 
-If you prefer to install the library manually via a .zip-file go to the `release section <>`_ of the repository and get the .zip- or tar.gz-file from the desired release.
+If you prefer to install the library manually via a .zip-file go to the `release section <https://github.com/Infineon/arduino-xensiv-3d-magnetic-sensor-tlx493d/releases>`_ of the repository and get the .zip- or tar.gz-file from the desired release.
 As soon as you downloaded the file you can go back to the Arduino IDE and choose *Sketch > Include Library > Add .ZIP library* from the menu.
 
 .. warning:: 

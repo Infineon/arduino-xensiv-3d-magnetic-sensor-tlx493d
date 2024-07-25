@@ -1,0 +1,17 @@
+{  
+    "name":"XENSIV 3D Magnetic Sensor TLx493D",
+    "keywords":"3d, xensiv, sensor, magnetic, sensor2go",
+    "description":"C/C++ library for Infineons XENSIV™ 3D magnetic sensors family",
+    "repository":{  
+       "type":"git",
+       "url":"https://github.com/Infineon/arduino-xensiv-3d-magnetic-sensor-tlx493d.git",
+       "branch":"master"
+    },
+    "version":"1.0.0",
+    "license":"MIT",
+    "frameworks":"arduino",
+    "platforms":[  
+       "infineonxmc",
+       "atmelavr"
+    ]
+ }
