@@ -39,19 +39,19 @@ Arduino Library of Infineon's [**XENSIV™ 3D Magnetic Sensor TLx493D**](https:/
 
 ### Getting Started
 
-Find a detailed getting started guide for the supported XENSIV™ 3D Magnetic TLX493D Sensors [here](link). <!-- TODO: ADD LINK -->
+Find a detailed getting started guide for the supported XENSIV™ 3D Magnetic TLX493D Sensors [here](https://arduino-xensiv-3d-magnetic-sensor-tlx493d.readthedocs.io/en/latest/quickstart-guide.html).
 
 ### Library Installation
 
-Look for `XENSIV 3D Magnetic Sensor TLx493D` in the Arduino library manager in order to install this library. An alternative installation method can be found [here](link). <!-- TODO: ADD LINK -->
+Look for `XENSIV 3D Magnetic Sensor TLx493D` in the Arduino library manager in order to install this library. An alternative installation method can be found [here](https://arduino-xensiv-3d-magnetic-sensor-tlx493d.readthedocs.io/en/latest/lib-install.html).
 
 ### API Reference
 
-Discover all the API features and functions in the [API Reference]() section of the documentation. <!-- TODO: ADD LINK -->
+Discover all the API features and functions in the [API Reference](https://arduino-xensiv-3d-magnetic-sensor-tlx493d.readthedocs.io/en/latest/api-ref.html) section of the documentation.
 
 ### More Information
 
-More information can be found within the library [docs](). <!-- TODO: ADD LINK -->
+More information can be found within the library [docs](https://arduino-xensiv-3d-magnetic-sensor-tlx493d.readthedocs.io/en/latest/index.html).
 
 ### License
 

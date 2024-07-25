@@ -33,7 +33,7 @@ Required Software
 
 - `Arduino IDE <https://www.arduino.cc/en/main/software>`_
 - `XMC-for-Arduino <https://github.com/Infineon/XMC-for-Arduino>`_
-- `XENSIV™ 3D Magnetic Sensors TLx493D Arduino Library <test>`_
+- `XENSIV™ 3D Magnetic Sensors TLx493D Arduino Library <https://github.com/Infineon/arduino-xensiv-3d-magnetic-sensor-tlx493d.git>`_
 
 Software Installation
 ---------------------
@@ -52,9 +52,6 @@ The official Arduino boards are already available in the Arduino IDE, but other 
 
 In the Arduino IDE, go to the menu *Sketch > Include Library > Library Manager*. Type *XENSIV 3D Magnetic Sensor TLx493D*
 and wait for the tool to find it. Click on *install* and give the IDE a moment to install the library.
-
-.. image:: img/tbd.jpg
-  :width: 500
 
 Hardware Setup
 --------------
