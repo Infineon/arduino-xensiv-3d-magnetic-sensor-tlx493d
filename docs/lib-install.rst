@@ -23,8 +23,6 @@ As soon as you downloaded the file you can go back to the Arduino IDE and choose
 .. warning:: 
     As a general recommendation, direct downloads from the master branch should be avoided. Even if it should not, it could contain incomplete or faulty code. So please stick to the releases.
 
-.. Include image of the Arduino library manager
-
 Manual Installation
 -------------------
 

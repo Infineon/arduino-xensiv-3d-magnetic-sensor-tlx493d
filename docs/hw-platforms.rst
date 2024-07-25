@@ -348,67 +348,67 @@ In the following table you find an extensive list of examples we have verified. 
     - Kit2Go
     - A1B6
     - Test suite, read_icc
-    - arduino-cli 0.34.0 wih xmc 2.2.0.
+    - arduino-cli 0.34.0 with xmc 2.2.0.
   * - pass
     - Kit2Go
     - A2B6
     - Test suite, read_icc
-    - arduino-cli 0.34.0 wih xmc 2.2.0.
+    - arduino-cli 0.34.0 with xmc 2.2.0.
   * - pass
     - Kit2Go
     - P2B6
     - Test suite, read_icc
-    - arduino-cli 0.34.0 wih xmc 2.2.0.
+    - arduino-cli 0.34.0 with xmc 2.2.0.
   * - pass
     - Kit2Go
     - W2B6
     - Test suite, read_icc
-    - arduino-cli 0.34.0 wih xmc 2.2.0.
+    - arduino-cli 0.34.0 with xmc 2.2.0.
   * - pass
     - Kit2Go
     - P3I8
     - Test suite, read_spi_sensor
-    - arduino-cli 0.34.0 wih xmc 2.2.0. Experimental board, which is not for sale yet.
+    - arduino-cli 0.34.0 with xmc 2.2.0. Experimental board, which is not for sale yet.
   * - pass
     - S2Go
     - A1B6
     - read_iic_a1b6_extended_addresses
-    - arduino-cli 0.34.0 wih xmc 2.2.0.
+    - arduino-cli 0.34.0 with xmc 2.2.0.
   * - pass
     - S2Go
     - A2BW
     - Test suite
-    - arduino-cli 0.34.0 wih xmc 2.2.0. Experimental board with W2B6 as base board. Not for sale.
+    - arduino-cli 0.34.0 with xmc 2.2.0. Experimental board with W2B6 as base board. Not for sale.
   * - pass
     - S2Go
     - W2B6
     - Test suite
-    - arduino-cli 0.34.0 wih xmc 2.2.0.
+    - arduino-cli 0.34.0 with xmc 2.2.0.
   * - pass
     - S2Go
     - W2BW
     - Test suite
-    - arduino-cli 0.34.0 wih xmc 2.2.0.
+    - arduino-cli 0.34.0 with xmc 2.2.0.
   * - pass
     - XMC4700 Relax Kit Lite
     - W2BW, W2B6, P3B6
     - read_3_different_iic_sensors
-    - arduino-cli 0.34.0 wih xmc 2.2.0.
+    - arduino-cli 0.34.0 with xmc 2.2.0.
   * - pass
     - XMC4700 Relax Kit Lite
     - W2B6
     - read_3_equal_iic_sensors
-    - arduino-cli 0.34.0 wih xmc 2.2.0.
+    - arduino-cli 0.34.0 with xmc 2.2.0.
   * - pass
     - XMC4700 Relax Kit Lite
     - W2BW
     - read_iic_sensor_with_wakeup
-    - arduino-cli 0.34.0 wih xmc 2.2.0.
+    - arduino-cli 0.34.0 with xmc 2.2.0.
   * - pass
     - S2Go
     - P3B6
     - Test suite
-    - arduino-cli 0.34.0 wih xmc 2.2.0. Experimental board with W2B6 as base board. Not yet for sale.
+    - arduino-cli 0.34.0 with xmc 2.2.0. Experimental board with W2B6 as base board. Not yet for sale.
   * - pass
     - Uno R3
     - W2B6

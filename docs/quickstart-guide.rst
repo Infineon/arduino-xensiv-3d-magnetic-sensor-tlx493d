@@ -53,9 +53,6 @@ The official Arduino boards are already available in the Arduino IDE, but other 
 In the Arduino IDE, go to the menu *Sketch > Include Library > Library Manager*. Type *XENSIV 3D Magnetic Sensor TLx493D*
 and wait for the tool to find it. Click on *install* and give the IDE a moment to install the library.
 
-.. image:: img/tbd.jpg
-  :width: 500
-
 Hardware Setup
 --------------
 
