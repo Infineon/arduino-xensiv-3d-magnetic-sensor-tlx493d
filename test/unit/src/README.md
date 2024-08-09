@@ -1,1 +1,1 @@
-Note: We utilized v2.6.0 of ThrowTheSwitch Unity for this project.The official GitHub repository for version 2.6.0 of ThrowTheSwitch Unity can be found [here](https://github.com/ThrowTheSwitch/Unity/releases/tag/v2.6.0).
+Note: We utilized v2.6.0 of ThrowTheSwitch Unity for this project. The official GitHub repository for version 2.6.0 of ThrowTheSwitch Unity can be found [here](https://github.com/ThrowTheSwitch/Unity/releases/tag/v2.6.0).
