@@ -252,9 +252,14 @@ namespace ifx {
                  * 
                  * @param[in] executeInit    Whether to execute the bus objects init method after reset.
                  */
-                void reset(bool executeInit = false) {
+                void reset(bool executeInit = true, bool executeDeinit = true) {
+                    if( executeDeinit ) {
+                        busWrapper.deinit();
+                    }
+
+                    bsc.enablePower(false);
                     sensor.functions->setResetValues(&sensor);
-                    bsc.reset();
+                    bsc.enablePower(true);
 
                     if( executeInit ) {
                         busWrapper.init();
