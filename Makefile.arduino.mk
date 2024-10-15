@@ -77,41 +77,39 @@ EXAMPLES = iic_c_style iic iic_with_wakeup 3iic 3iic_equal iic_ext_addr spi
 
 ### Arduino targets
 clean:
-	-rm -rf build/* cppcheck_reports build.ino.*elf.* ./-lm.res log.[0-9]*
-	find . -name '*ctu-info' -exec \rm {} \;
+	-rm -rf build/*
 
 
 arduino: clean
-	cp -r config/arduinoLibraryTemplate/* build
-	find src -name '*.[hc]*' -a \! -path '*mtb*' -a \! -name 'main*' -print -exec cp {} build \;
-	rm -f build/n_* build/*.save
+	-mkdir build
+	find src -name '*.[hc]*' -print -exec cp {} build \;
 
 
 iic_ext_addr: arduino
-	cp examples/framework/arduino/read_iic_a1b6_extended_addresses.ino build/build.ino
+	cp examples/read_iic_a1b6_extended_addresses/read_iic_a1b6_extended_addresses.ino build/build.ino
 
 
 iic_c_style: arduino
-	cp examples/framework/arduino/read_iic_sensor_c_style.ino build/build.ino
+	cp examples/read_iic_sensor_c_style/read_iic_sensor_c_style.ino build/build.ino
  
 
 spi: arduino
-	cp examples/framework/arduino/read_spi_sensor.ino build/build.ino
+	cp examples/read_spi_sensor/read_spi_sensor.ino build/build.ino
  
 
 iic: arduino
-	cp examples/framework/arduino/read_iic_sensor.ino build/build.ino
+	cp examples/read_iic_sensor/read_iic_sensor.ino build/build.ino
 
 iic_with_wakeup: arduino
-	cp examples/framework/arduino/read_iic_sensor_with_wakeup.ino build/build.ino
+	cp examples/read_iic_sensor_with_wakeup/read_iic_sensor_with_wakeup.ino build/build.ino
 
 
 3iic: arduino
-	cp examples/framework/arduino/read_3_different_iic_sensors.ino build/build.ino
+	cp examples/read_3_different_iic_sensors/read_3_different_iic_sensors.ino build/build.ino
 
 
 3iic_equal: arduino
-	cp examples/framework/arduino/read_3_equal_iic_sensors.ino build/build.ino
+	cp examples/read_3_equal_iic_sensors/read_3_equal_iic_sensors.ino build/build.ino
 
 
 unity: arduino
