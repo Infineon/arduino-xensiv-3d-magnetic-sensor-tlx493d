@@ -161,7 +161,7 @@ bool tlx493d_getMagneticFieldAndTemperature(TLx493D_t *sensor, double *x, double
  * @param[in,out]   sensor  A pointer to a TLx493D_t struct, which represents the TLx493D sensor.
  * @param[in]       meas    The `meas` parameter is of type `TLx493D_MeasurementType_t`, which is an enumeration
  * type representing different measurement types for the TLx493D sensor. All available options can be found in the
- * enum `TLx493D_MeasurementType_t` in the library file `tlx493d_types.h`.
+ * enum `TLx493D_MeasurementType_t` in the library file `tlx493d_enums.h`.
  * 
  * @return The function `tlx493d_setMeasurement` is returning a boolean value.
  * @retval false Error.
@@ -224,7 +224,7 @@ bool tlx493d_setDefaultConfig(TLx493D_t *sensor);
  * @param[in,out]   sensor  A pointer to a TLx493D_t struct, which represents the TLx493D sensor.
  * @param[in]       addr    The `addr` parameter is of type `TLx493D_IICAddressType_t` , which is an enumeration type
  * representing the I2C address of the sensor. You can see all available addresses in the enum `TLx493D_IICAddressType_t`
- * in the library file `tlx493d_types.h`.
+ * in the library file `tlx493d_enums.h`.
  * 
  * @return The function `tlx493d_setIICAddress` is returning a boolean value.
  * @retval false Error.
@@ -284,7 +284,7 @@ bool tlx493d_disableInterrupt(TLx493D_t *sensor);
  * @param[in,out]   sensor  A pointer to a TLx493D_t struct, which represents the TLx493D sensor.
  * @param[in]       mode    The `mode` parameter is of type `TLx493D_PowerModeType_t`, which is an enumeration type
  * representing different power modes for the TLx493D sensor. All available options can be found in the enum 
- * `TLx493D_PowerModeType_t` in the library file `tlx493d_types.h`.
+ * `TLx493D_PowerModeType_t` in the library file `tlx493d_enums.h`.
  * 
  * @return The function `tlx493d_setPowerMode` is returning a boolean value.
  * @retval false Error.
@@ -300,7 +300,7 @@ bool tlx493d_setPowerMode(TLx493D_t *sensor, TLx493D_PowerModeType_t mode);
  * @param[in,out]   sensor  A pointer to a TLx493D_t struct, which represents the TLx493D sensor.
  * @param[in]       rate    The `rate` parameter is of type `TLx493D_UpdateRateType_t`, which is an enumeration type
  * representing different update rates for the sensor. All available options can be found in the enum `TLx493D_UpdateRateType_t`
- * in the library file ´tlx493d_types.h`.
+ * in the library file ´tlx493d_enums.h`.
  * 
  * @return The function `tlx493d_setUpdateRate` is returning a boolean value.
  * @retval false Error.
