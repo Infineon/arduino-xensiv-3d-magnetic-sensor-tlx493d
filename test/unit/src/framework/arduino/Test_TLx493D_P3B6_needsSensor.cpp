@@ -2,8 +2,7 @@
 #include "Test_includes.hpp"
 
 
-// const static uint8_t POWER_PIN = 15; // XMC1100 : LED2
-const static uint8_t POWER_PIN = 8; // P1.10
+const static uint8_t POWER_PIN = 8;
 
 static ifx::tlx493d::Kit2GoBoardSupport bsc;
 
@@ -19,12 +18,13 @@ extern "C" {
         // deinit in TEAR_DOWN will cut communication link, so if deinit is called communication must be reinitialized !
         (void) TLx493D_P3B6_init(&dut);
 
-        bsc.setPowerPin(POWER_PIN, OUTPUT, INPUT, HIGH, LOW, 0, 250000);
+        bsc.setPowerPin(POWER_PIN, OUTPUT, INPUT, LOW, HIGH, 1000, 250000);
+
         ifx::tlx493d::initBoardSupport(&dut, bsc);
         bsc.init();
 
-        // ifx::tlx493d::initCommunication(&dut, Wire, TLx493D_IIC_ADDR_A0_e, true);
-        ifx::tlx493d::initCommunication(&dut, Wire, TLx493D_IIC_ADDR_A1_e, true);
+        ifx::tlx493d::initCommunication(&dut, Wire, TLx493D_IIC_ADDR_A0_e, true);
+        // ifx::tlx493d::initCommunication(&dut, Wire, TLx493D_IIC_ADDR_A1_e, true);
 
         dut.functions->setDefaultConfig(&dut);
     }

@@ -25,7 +25,7 @@ namespace ifx {
     namespace tlx493d {
         static uint8_t   spiReadAddress = 0x00;
 
-        static uint32_t  clockFreq = 200000;
+        static uint32_t  clockFreq = 1000000;
         static uint8_t   bitOrder  = MSBFIRST;
         static uint8_t   dataMode  = SPI_MODE2;
 

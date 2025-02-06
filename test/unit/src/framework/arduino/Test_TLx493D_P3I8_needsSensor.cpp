@@ -2,6 +2,7 @@
 #include "Test_includes.hpp"
 
 
+const uint8_t POWER_PIN       = 4;
 const uint8_t CHIP_SELECT_PIN = 3;
 
 static ifx::tlx493d::Kit2GoBoardSupport bsc;
@@ -18,10 +19,12 @@ extern "C" {
         // deinit in TEAR_DOWN will cut communication link, so if deinit is called communication must be reinitialized !
         (void) TLx493D_P3I8_init(&dut);
 
-        // bsc.setPowerPin(POWER_PIN, OUTPUT, HIGH, LOW, 0, 250000);
-        bsc.setSelectPin(CHIP_SELECT_PIN, OUTPUT, INPUT, LOW, HIGH, 50, 50);
+        bsc.setPowerPin(POWER_PIN, OUTPUT, INPUT, LOW, HIGH, 1000, 250000);
+        bsc.setSelectPin(CHIP_SELECT_PIN, OUTPUT, INPUT, LOW, HIGH, 0, 0);
+
         ifx::tlx493d::initBoardSupport(&dut, bsc);
-        bsc.init(false, true);
+        // bsc.init(false, true);
+        bsc.init(true, true);
 
         ifx::tlx493d::initCommunication(&dut, SPI, true);
         dut.functions->setDefaultConfig(&dut);

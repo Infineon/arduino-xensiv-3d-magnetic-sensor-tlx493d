@@ -513,24 +513,24 @@ TEST_IFX(TLx493D_P3I8_needsSensorInternal, checkWakeUpThresholdFunctionality)
 
     // X
     tlx493d_common_concatBytes(&dut, P3I8_WU_XL_MSBS_e, P3I8_WU_XL_LSBS_e, &th);
-    TEST_ASSERT_INT16_WITHIN( delta, -153,  th ); // XL
+    TEST_ASSERT_INT16_WITHIN( delta, -143,  th ); // XL
 
     tlx493d_common_concatBytes(&dut, P3I8_WU_XH_MSBS_e, P3I8_WU_XH_LSBS_e, &th);
-    TEST_ASSERT_INT16_WITHIN( delta, 154,  th ); // XH
+    TEST_ASSERT_INT16_WITHIN( delta, 144,  th ); // XH
 
     // Y
     tlx493d_common_concatBytes(&dut, P3I8_WU_YL_MSBS_e, P3I8_WU_YL_LSBS_e, &th);
-    TEST_ASSERT_INT16_WITHIN( delta, -152,  th ); // YL
+    TEST_ASSERT_INT16_WITHIN( delta, -143,  th ); // YL
 
     tlx493d_common_concatBytes(&dut, P3I8_WU_YH_MSBS_e, P3I8_WU_YH_LSBS_e, &th);
-    TEST_ASSERT_INT16_WITHIN( delta, 155,  th ); // YH
+    TEST_ASSERT_INT16_WITHIN( delta, 149,  th ); // YH
 
     // Z
     tlx493d_common_concatBytes(&dut, P3I8_WU_ZL_MSBS_e, P3I8_WU_ZL_LSBS_e, &th);
-    TEST_ASSERT_INT16_WITHIN( delta, -151,  th ); // ZL
+    TEST_ASSERT_INT16_WITHIN( delta, -148,  th ); // ZL
 
     tlx493d_common_concatBytes(&dut, P3I8_WU_ZH_MSBS_e, P3I8_WU_ZH_LSBS_e, &th);
-    TEST_ASSERT_INT16_WITHIN( delta, 152,  th ); // ZH
+    TEST_ASSERT_INT16_WITHIN( delta, 144,  th ); // ZH
 }
 
 

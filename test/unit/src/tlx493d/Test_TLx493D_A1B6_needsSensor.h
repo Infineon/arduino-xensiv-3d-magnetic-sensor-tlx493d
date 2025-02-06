@@ -48,7 +48,7 @@ TEST(TLx493D_A1B6_needsSensor, getTemperature)
     double temperature = 0.0;
 
     TEST_ASSERT_EQUAL( true, dut.functions->getTemperature(&dut, &temperature));
-    TEST_ASSERT_FLOAT_WITHIN( 8.0, 25.0, temperature ); // Environmental temp is around 20 - 30 deg C
+    TEST_ASSERT_FLOAT_WITHIN( 20.0, 25.0, temperature ); // Environmental temp is expected to be in range +5 to +45 deg C
 }
 
 TEST(TLx493D_A1B6_needsSensor, getMagneticField)

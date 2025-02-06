@@ -215,7 +215,7 @@ bool tlx493d_gen_3_setSensitivity(TLx493D_t *sensor, uint8_t shortBF, uint8_t xt
 
 
 bool tlx493d_gen_3_setDefaultConfig(TLx493D_t *sensor, uint8_t caBF, uint8_t intBF) {
-    tlx493d_common_setBitfield(sensor, caBF, 0);
+    tlx493d_common_setBitfield(sensor, caBF, 1);
     tlx493d_common_setBitfield(sensor, intBF, 1);
     return sensor->functions->enable1ByteReadMode(sensor);
 }

@@ -65,7 +65,7 @@ namespace ifx {
                 /**
                  * @brief The function `init` initializes all necessary peripherals of the chosen sensor board.
                  * It initializes the BoardSupportClass, the communication interface and calls the `setDefaultConfig`
-                 * function in order to disable the interrupt of the sensor and putting it into 1-Byte-Read-Mode.
+                 * function in order to initialize the sensor registers to some meaningful default.
                  * 
                  * @param[in] enablePower           Tells the BoardSupportClass, whether it should turn the power pins on
                  * or keep them off at initialization. 
@@ -247,10 +247,11 @@ namespace ifx {
                 }
 
                 /**
-                 * @brief The function `reset` set the sensor's registers to its reset values, does a power down/up cycle,
+                 * @brief The function `reset` sets the sensor's registers to its reset values, does a power down/up cycle,
                  * and reinitializes the bus interface if requested. Then the default sensor configuration is set.
                  * 
                  * @param[in] executeInit    Whether to execute the bus objects init method after reset.
+                 * @param[in] executeDeinit  Whether to execute the bus objects deinit method before reset.
                  */
                 void reset(bool executeInit = true, bool executeDeinit = true) {
                     if( executeDeinit ) {
@@ -346,24 +347,52 @@ namespace ifx {
                 /**
                  * @brief The function `init` initializes all necessary peripherals of the chosen sensor board.
                  * It initializes the BoardSupportClass, the communication interface and calls the `setDefaultConfig`
-                 * function
-                 *
+                 * function in order to initialize the sensor registers to some meaningful sensor specific default.
+                 * 
+                 * @param[in] enablePower           Tells the BoardSupportClass, whether it should turn the power pins on
+                 * or keep them off at initialization.
+                 * @param[in] enableSelect          Tells the BoardSupportClass, whether it should turn the select pins on
+                 * or keep them off at initialization.
+                 * @param[in] executeInit           Whether to execute the bus objects init method upon initializing the communication. True - by default.
+                 * 
+                 * @return The function `init` returns a boolean value.
+                 * @retval false Error.
+                 * @retval true Function execution was successful.
                  */
-                void init(bool enablePower = false, bool enableSelect = true) {
-                    (void) tlx493d_init(&sensor, sensorType);
-                    (void) initBoardSupport(&sensor, bsc);
+                bool init(bool enablePower = true, bool enableSelect = true, bool executeInit = true) {
+                    if( ! tlx493d_init(&sensor, sensorType) ) {
+                        logError("tlx493d_init failed !");
+                        return false;
+                    }
+
+                    if( ! initBoardSupport(&sensor, bsc) ) {
+                        logError("initBoardSupport failed !");
+                        return false;
+                    }
+
                     bsc.init(enablePower, enableSelect, false);
-                    initCommunication(&sensor, busWrapper, true);
-                    setDefaultConfig();
+
+                    if( ! initCommunication(&sensor, busWrapper, executeInit) ) {
+                        logError("initCommunication failed !");
+                        return false;
+                    }
+
+                    if( ! setDefaultConfig() ) {
+                        logError("setDefaultConfig failed !");
+                        return false;
+                    }
+
+                    return true;
                 }
+
 
                 /**
                  * @brief The function `begin` calls the `init` function.
                  * For details see `init` function.
                  * 
                  */
-                void begin(bool enablePower = false, bool enableSelect = true) {
-                    init(enablePower, enableSelect);
+                bool begin(bool enablePower = false, bool enableSelect = true) {
+                    return( init(enablePower, enableSelect) );
                 }
 
 
@@ -373,10 +402,10 @@ namespace ifx {
                  * all allocated memory (free the memory to be precise).
                  * 
                  */
-                void deinit() {
+                bool deinit() {
                     deinitCommunication(&sensor, false);
                     bsc.deinit();
-                    (void) tlx493d_deinit(&sensor);
+                    return( tlx493d_deinit(&sensor) );
                 }
 
                 /**
@@ -384,8 +413,8 @@ namespace ifx {
                  * For details see `deinit`function.
                  * 
                  */
-                void end() {
-                    deinit();
+                bool end() {
+                    return( deinit() );
                 }
 
                 /**
@@ -453,12 +482,28 @@ namespace ifx {
                     bsc.enablePower(false);
                 }
 
+
                 /**
-                 * @brief The function `reset` does a software reset as power down is not available with the current experimental
-                 * board for the P3I8 sensor.
+                 * @brief The function `reset` sets the sensor's registers to its reset values, does a power down/up cycle,
+                 * and reinitializes the bus interface if requested. Then the default sensor configuration is set.
+                 * 
+                 * @param[in] executeInit    Whether to execute the bus objects init method after reset.
+                 * @param[in] executeDeinit  Whether to execute the bus objects deinit method before reset.
                  */
-                void reset() {
-                    (void) tlx493d_softwareReset(&sensor);
+                void reset(bool executeInit = true, bool executeDeinit = true) {
+                    if( executeDeinit ) {
+                        sensor.comInterface.comLibFuncs->deinit.spi_deinit(&sensor);
+                    }
+
+                    bsc.enablePower(false);
+                    sensor.functions->setResetValues(&sensor);
+                    bsc.enablePower(true);
+
+                    if( executeInit ) {
+                        sensor.comInterface.comLibFuncs->init.spi_init(&sensor);
+                    }
+
+                    setDefaultConfig();
                 }
 
 

@@ -111,12 +111,20 @@ bool tlx493d_common_readRegistersAndCheck(TLx493D_t *sensor) {
 
     (void) memcpy(buf, sensor->regMap, sensor->regMapSize);
 
+/*
+    logInfo("tlx493d_common_readRegistersAndCheck ...");
+    logInfo("#####################################################################################");
+*/
+
     do {
         bool isOk  = tlx493d_transfer(sensor, NULL, 0, sensor->regMap, sensor->regMapSize);
         isOk      &= tlx493d_hasNotOnly0xFFInRegmap(sensor);
 
-        /*
+/*
         logInfo("isOk = %d", isOk);
+
+        bool hasValidData = sensor->functions->hasValidData(sensor);
+        logInfo("hasValidData = %d", hasValidData);
 
         logInfo("hasValidData = %d", sensor->functions->hasValidData(sensor));
         logInfo("hasValidBusParity = %d", sensor->functions->hasValidBusParity(sensor));
@@ -125,14 +133,29 @@ bool tlx493d_common_readRegistersAndCheck(TLx493D_t *sensor) {
         logInfo("isInTestMode = %d", sensor->functions->isInTestMode(sensor));
 
         logInfo("isFunctional = %d", sensor->functions->isFunctional(sensor));
+
+        bool hasValidFuseParity = sensor->functions->hasValidFuseParity(sensor);
+        logInfo("hasValidFuseParity = %d", hasValidFuseParity);
+
         logInfo("hasValidFuseParity = %d", sensor->functions->hasValidFuseParity(sensor));
         logInfo("hasValidConfigurationParity = %d", sensor->functions->hasValidConfigurationParity(sensor));
 
-        sensor->functions->printRegisters(sensor);
-        */
+        logInfo("isOk && hasValidData && hasValidFuseParity = %d", isOk && hasValidData && hasValidFuseParity);
 
-        // if( ! (isOk && sensor->functions->hasValidData(sensor) && sensor->functions->isFunctional(sensor)) ) {
+        sensor->functions->printRegisters(sensor);
+*/
+
+        /* if( ! (isOk && sensor->functions->hasValidData(sensor) && sensor->functions->isFunctional(sensor)) ) {
+           if( ! (isOk && hasValidData && hasValidFuseParity) ) { */
         if( ! (isOk && sensor->functions->hasValidData(sensor) && sensor->functions->hasValidFuseParity(sensor)) ) {
+/*
+   logInfo("tlx493d_common_readRegistersAndCheck  in if  --------   isOk = %d", isOk);
+   logInfo("isOk && hasValidData && hasValidFuseParity = %d", isOk && hasValidData && hasValidFuseParity);
+   logInfo("isOk = %d", isOk);
+   logInfo("hasValidData = %d", sensor->functions->hasValidData(sensor));
+   logInfo("hasValidFuseParity = %d", sensor->functions->hasValidFuseParity(sensor));
+*/
+
 /*
             logInfo("tlx493d_common_readRegistersAndCheck    --------   isOk = %d", isOk);
 
@@ -156,7 +179,8 @@ bool tlx493d_common_readRegistersAndCheck(TLx493D_t *sensor) {
 */
         }
         else {
-            break;
+          return true;
+          // break;
         }
     } while( true );
     /** } while( ! (isOk && sensor->functions->hasValidData(sensor)) ); */
