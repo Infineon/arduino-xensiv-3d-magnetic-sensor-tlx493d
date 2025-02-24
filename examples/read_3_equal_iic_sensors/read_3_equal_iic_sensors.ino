@@ -42,11 +42,11 @@ void setup() {
     dut1.setIICAddress(TLx493D_IIC_ADDR_A2_e);
     dut1.printRegisters();
 
-    dut2.begin();
+    dut2.begin(true, false, false, false);
     dut2.setIICAddress(TLx493D_IIC_ADDR_A1_e);
     dut2.printRegisters();
 
-    dut3.begin();
+    dut3.begin(true, false, false, false);
     dut3.printRegisters();
 
     Serial.println("setup done.\n");

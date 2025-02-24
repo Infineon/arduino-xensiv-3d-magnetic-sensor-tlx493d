@@ -177,22 +177,22 @@ bool tlx493d_gen_2_setIICAddress(TLx493D_t *sensor, uint8_t iicadrBF, uint8_t fp
 
     switch (addr) {
         case TLx493D_IIC_ADDR_A0_e:
-            bitfieldValue = 0b00;
+            bitfieldValue = 0x00;
             deviceAddress = (uint8_t) GEN_2_STD_IIC_ADDR_WRITE_A0;
             break;
 
         case TLx493D_IIC_ADDR_A1_e:
-            bitfieldValue = 0b01;
+            bitfieldValue = 0x01;
             deviceAddress = (uint8_t) GEN_2_STD_IIC_ADDR_WRITE_A1;
             break;
 
         case TLx493D_IIC_ADDR_A2_e:
-            bitfieldValue = 0b10;
+            bitfieldValue = 0x02;
             deviceAddress = (uint8_t) GEN_2_STD_IIC_ADDR_WRITE_A2;
             break;
 
         case TLx493D_IIC_ADDR_A3_e:
-            bitfieldValue = 0b11;
+            bitfieldValue = 0x03;
             deviceAddress = (uint8_t) GEN_2_STD_IIC_ADDR_WRITE_A3;
             break;
         
@@ -241,13 +241,13 @@ bool tlx493d_gen_2_setPowerMode(TLx493D_t *sensor, uint8_t modeBF, uint8_t fpBF,
     uint8_t mode = 0;
 
     switch(val) {
-        case TLx493D_LOW_POWER_MODE_e : mode = 0b00;
+        case TLx493D_LOW_POWER_MODE_e : mode = 0x00;
                                         break;
 
-        case TLx493D_MASTER_CONTROLLED_MODE_e : mode = 0b01;
+        case TLx493D_MASTER_CONTROLLED_MODE_e : mode = 0x01;
                                                 break;
 
-        case TLx493D_FAST_MODE_e : mode = 0b11;
+        case TLx493D_FAST_MODE_e : mode = 0x03;
                                    break;
 
         default : tlx493d_errorSelectionNotSupportedForSensorType(sensor, val, "TLx493D_PowerModeType_t");
@@ -272,10 +272,10 @@ bool tlx493d_gen_2_setUpdateRateFastSlow(TLx493D_t *sensor, uint8_t fpBF, uint8_
     uint8_t rate = 0;
 
     switch(val) {
-        case TLx493D_UPDATE_RATE_FAST_e : rate = 0b0;
+        case TLx493D_UPDATE_RATE_FAST_e : rate = 0x00;
                                     break;
 
-        case TLx493D_UPDATE_RATE_SLOW_e : rate = 0b1;
+        case TLx493D_UPDATE_RATE_SLOW_e : rate = 0x01;
                                    break;
 
         default : tlx493d_errorSelectionNotSupportedForSensorType(sensor, val, "TLx493D_UpdateRateType_t");
@@ -300,28 +300,28 @@ bool tlx493d_gen_2_setUpdateRate(TLx493D_t *sensor, uint8_t fpBF, uint8_t prdBF,
     uint8_t rate = 0;
 
     switch(val) {
-        case TLx493D_UPDATE_RATE_770_HZ_e : rate = 0b000;
+        case TLx493D_UPDATE_RATE_770_HZ_e : rate = 0x00;
                                     break;
 
-        case TLx493D_UPDATE_RATE_97_HZ_e : rate = 0b001;
+        case TLx493D_UPDATE_RATE_97_HZ_e : rate = 0x01;
                                    break;
 
-        case TLx493D_UPDATE_RATE_24_HZ_e : rate = 0b010;
+        case TLx493D_UPDATE_RATE_24_HZ_e : rate = 0x02;
                                    break;
 
-        case TLx493D_UPDATE_RATE_12_HZ_e : rate = 0b011;
+        case TLx493D_UPDATE_RATE_12_HZ_e : rate = 0x03;
                                    break;
 
-        case TLx493D_UPDATE_RATE_6_HZ_e : rate = 0b100;
+        case TLx493D_UPDATE_RATE_6_HZ_e : rate = 0x04;
                                   break;
 
-        case TLx493D_UPDATE_RATE_3_HZ_e : rate = 0b101;
+        case TLx493D_UPDATE_RATE_3_HZ_e : rate = 0x05;
                                   break;
 
-        case TLx493D_UPDATE_RATE_0_4_HZ_e : rate = 0b110;
+        case TLx493D_UPDATE_RATE_0_4_HZ_e : rate = 0x06;
                                     break;
 
-        case TLx493D_UPDATE_RATE_0_05_HZ_e : rate = 0b111;
+        case TLx493D_UPDATE_RATE_0_05_HZ_e : rate = 0x07;
                                      break;
 
         default : tlx493d_errorSelectionNotSupportedForSensorType(sensor, val, "TLx493D_UpdateRateType_t");
@@ -344,7 +344,7 @@ bool tlx493d_gen_2_setUpdateRate(TLx493D_t *sensor, uint8_t fpBF, uint8_t prdBF,
 bool tlx493d_gen_2_hasValidData(const TLx493D_t *sensor, uint8_t modeBF, uint8_t pd3BF, uint8_t pd0BF) {
     return( sensor->functions->hasValidBusParity(sensor)
          && sensor->functions->hasValidTBit(sensor)
-         && ((tlx493d_common_returnBitfield(sensor, modeBF) == 0b11U) ? true
+         && ((tlx493d_common_returnBitfield(sensor, modeBF) == 0x03U) ? true
                                                                       : ((tlx493d_common_returnBitfield(sensor, pd3BF) == 1U) && (tlx493d_common_returnBitfield(sensor, pd0BF) == 1U))) );
 }
 

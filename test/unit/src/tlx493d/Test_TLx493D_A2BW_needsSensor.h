@@ -21,7 +21,7 @@ static TLx493D_t dut;
 
 
 // define test group name
-TEST_GROUP(TLx493D_A2BW_needsSensor);
+// TEST_GROUP(TLx493D_A2BW_needsSensor);
 TEST_GROUP(TLx493D_A2BW_needsSensorInternal);
 
 
@@ -93,7 +93,7 @@ TEST_IFX(TLx493D_A2BW_needsSensorInternal, checkGetMagneticFieldAndTemperature)
 
     int16_t xfrr2, yfrr2, zfrr2, tfrr2;
     tlx493d_gen_2_convertTemperatureToRaw(&dut, tfr0, &tfrr2);
-    dut.functions->calculateRawMagneticFieldAtTemperature(&dut, tfr, TLx493D_FULL_RANGE_e, xfr, yfr, zfr, &xfrr2, &yfrr2, &zfrr2);
+    dut.functions->calculateRawMagneticFieldAtTemperature(&dut, (int16_t) tfr, TLx493D_FULL_RANGE_e, xfr, yfr, zfr, &xfrr2, &yfrr2, &zfrr2);
 
     TEST_ASSERT_EQUAL_INT16( tfrr, tfrr2 );
     TEST_ASSERT_EQUAL_INT16( xfrr, xfrr2 );
@@ -201,8 +201,8 @@ TEST_IFX(TLx493D_A2BW_needsSensorInternal, checkConfigTriggerFunctionality)
     // try triggers
     TEST_ASSERT_TRUE( dut.functions->setTrigger(&dut, TLx493D_ADC_ON_READ_AFTER_REG_05_e) );
     TEST_ASSERT_TRUE( dut.functions->readRegisters(&dut));
-    TEST_ASSERT_GREATER_OR_EQUAL_INT8( 0b10, tlx493d_common_returnBitfield(&dut, A2BW_TRIG_e) );
-    TEST_ASSERT_LESS_OR_EQUAL_INT8( 0b11, tlx493d_common_returnBitfield(&dut, A2BW_TRIG_e) );
+    TEST_ASSERT_GREATER_OR_EQUAL_INT8( 0x02, tlx493d_common_returnBitfield(&dut, A2BW_TRIG_e) );
+    TEST_ASSERT_LESS_OR_EQUAL_INT8( 0x03, tlx493d_common_returnBitfield(&dut, A2BW_TRIG_e) );
 
     // Not to be used with our default config CA = 0, INT = 1 !
     // TEST_ASSERT_TRUE( dut.functions->setTrigger(&dut, TLx493D_ADC_ON_READ_BEFORE_FIRST_MSB_e) );
@@ -339,11 +339,11 @@ TEST_IFX(TLx493D_A2BW_needsSensorInternal, checkModeUpdateRateFunctionality)
     // Supported
     TEST_ASSERT_TRUE( dut.functions->setUpdateRate(&dut, TLx493D_UPDATE_RATE_SLOW_e) );
     TEST_ASSERT_TRUE( dut.functions->readRegisters(&dut));
-    TEST_ASSERT_EQUAL_HEX8( 0b1, tlx493d_common_returnBitfield(&dut, A2BW_PRD_e) );
+    TEST_ASSERT_EQUAL_HEX8( 0x01, tlx493d_common_returnBitfield(&dut, A2BW_PRD_e) );
 
     TEST_ASSERT_TRUE( dut.functions->setUpdateRate(&dut, TLx493D_UPDATE_RATE_FAST_e) );
     TEST_ASSERT_TRUE( dut.functions->readRegisters(&dut));
-    TEST_ASSERT_EQUAL_HEX8( 0b0, tlx493d_common_returnBitfield(&dut, A2BW_PRD_e) );
+    TEST_ASSERT_EQUAL_HEX8( 0x00, tlx493d_common_returnBitfield(&dut, A2BW_PRD_e) );
 
 
     // Unsupported

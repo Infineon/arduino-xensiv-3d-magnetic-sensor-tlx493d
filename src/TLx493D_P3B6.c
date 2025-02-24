@@ -262,10 +262,21 @@ bool TLx493D_P3B6_setSensitivity(TLx493D_t *sensor, TLx493D_SensitivityType_t va
 
 
 bool TLx493D_P3B6_setDefaultConfig(TLx493D_t *sensor) {
-    bool b = tlx493d_gen_3_setDefaultConfig(sensor, P3B6_COLLISION_DIS_e, P3B6_INT_DIS_e);
+    tlx493d_common_setBitfield(sensor, P3B6_MODE_SEL_e, 1);
+    tlx493d_common_setBitfield(sensor, P3B6_INT_DIS_e, 1);
+    tlx493d_common_setBitfield(sensor, P3B6_COLLISION_DIS_e, 1);
+    tlx493d_common_setBitfield(sensor, P3B6_TRIGGER_SEL_e, 2);
+    tlx493d_common_setBitfield(sensor, P3B6_PROT_SEL_e, 1);
+    bool b = tlx493d_common_writeRegister(sensor, P3B6_MODE_SEL_e);
 
-    tlx493d_common_setBitfield(sensor, P3B6_RST_FLG_CLR_e, 1);
-    b &= tlx493d_common_writeRegister(sensor, P3B6_RST_FLG_CLR_e);
+    tlx493d_common_setBitfield(sensor, P3B6_CHANNEL_SEL_e, 0);
+    b |= tlx493d_common_writeRegister(sensor, P3B6_CHANNEL_SEL_e);
+
+
+    // bool b = tlx493d_gen_3_setDefaultConfig(sensor, P3B6_COLLISION_DIS_e, P3B6_INT_DIS_e);
+
+    // tlx493d_common_setBitfield(sensor, P3B6_RST_FLG_CLR_e, 1);
+    // b &= tlx493d_common_writeRegister(sensor, P3B6_RST_FLG_CLR_e);
 
     return b;
 }

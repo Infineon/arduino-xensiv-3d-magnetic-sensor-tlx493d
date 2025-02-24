@@ -131,6 +131,9 @@ extern "C" {
 */
 void setup() {
     Serial.begin(115200);
+
+    while( !Serial ) ;
+
     delay(3000);
 
     Serial.print("setup done.\n");

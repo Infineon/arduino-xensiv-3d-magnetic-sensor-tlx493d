@@ -19,13 +19,16 @@ uint8_t count = 0;
 
 void setup() {
     Serial.begin(115200);
+
+    while (!Serial) ;
+
     delay(3000);
 
     /** Setting the chip select pin for the SPI board using the functions of the Board Support Class.
      * Power supply has to be switched on through transistor, therefore inverse logic.
      */
     dut.setPowerPin(POWER_PIN, OUTPUT, INPUT, LOW, HIGH, 1000, 250000);
-    dut.setSelectPin(CHIP_SELECT_PIN, OUTPUT, INPUT, LOW, HIGH, 0, 0);
+    dut.setSelectPin(CHIP_SELECT_PIN, OUTPUT, INPUT, LOW, HIGH, 0, 0, 0, 0);
     dut.begin(true, true);
 
     Serial.print("setup done.\n");

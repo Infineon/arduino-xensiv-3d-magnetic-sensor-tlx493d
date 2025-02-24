@@ -7,9 +7,9 @@
 
 namespace ifx {
     namespace tlx493d {
-        Kit2GoBoardSupport::Kit2GoBoardSupport() : powerPins{false, 0, 0, 0, 0, 0, 0, 0},
-                                                   selectPins{false, 0, 0, 0, 0, 0, 0, 0},
-                                                   addressPins{false, 0, 0, 0, 0, 0, 0, 0} {
+        Kit2GoBoardSupport::Kit2GoBoardSupport() : powerPins{false, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                                   selectPins{false, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                                   addressPins{false, 0, 0, 0, 0, 0, 0, 0, 0, 0} {
         }
 
 
@@ -70,8 +70,10 @@ namespace ifx {
 
         void Kit2GoBoardSupport::setPowerPin(uint8_t pinNumber, uint8_t pinDriveDirection, uint8_t pinTristateDirection,
                                              uint8_t pinEnableValue, uint8_t pinDisableValue,
-                                             uint32_t delayAfterEnable, uint32_t delayAfterDisable) {
-            powerPins[0] = { true, pinNumber, pinDriveDirection, pinTristateDirection, pinEnableValue, pinDisableValue, delayAfterEnable, delayAfterDisable };
+                                             uint32_t delayAfterEnable, uint32_t delayAfterDisable,
+                                             uint32_t delayBeforeEnable, uint32_t delayBeforeDisable) {
+            powerPins[0] = { true, pinNumber, pinDriveDirection, pinTristateDirection, pinEnableValue, pinDisableValue,
+                             delayAfterEnable, delayAfterDisable, delayBeforeEnable, delayBeforeDisable };
         }
 
 
@@ -82,8 +84,10 @@ namespace ifx {
 
         void Kit2GoBoardSupport::setSelectPin(uint8_t pinNumber, uint8_t pinDriveDirection, uint8_t pinTristateDirection,
                                               uint8_t pinEnableValue, uint8_t pinDisableValue,
-                                              uint32_t delayAfterEnable, uint32_t delayAfterDisable) {
-            selectPins[0] = { true, pinNumber, pinDriveDirection, pinTristateDirection, pinEnableValue, pinDisableValue, delayAfterEnable, delayAfterDisable };
+                                              uint32_t delayAfterEnable, uint32_t delayAfterDisable,
+                                              uint32_t delayBeforeEnable, uint32_t delayBeforeDisable) {
+            selectPins[0] = { true, pinNumber, pinDriveDirection, pinTristateDirection, pinEnableValue, pinDisableValue,
+                              delayAfterEnable, delayAfterDisable, delayBeforeEnable, delayBeforeDisable };
         }
 
 
@@ -94,8 +98,10 @@ namespace ifx {
 
         void Kit2GoBoardSupport::setAddressPin(uint8_t pinNumber, uint8_t pinDriveDirection, uint8_t pinTristateDirection,
                                                uint8_t pinEnableValue, uint8_t pinDisableValue,
-                                               uint32_t delayAfterEnable, uint32_t delayAfterDisable) {
-            addressPins[0] = { true, pinNumber, pinDriveDirection, pinTristateDirection, pinEnableValue, pinDisableValue, delayAfterEnable, delayAfterDisable };
+                                               uint32_t delayAfterEnable, uint32_t delayAfterDisable,
+                                               uint32_t delayBeforeEnable, uint32_t delayBeforeDisable) {
+            addressPins[0] = { true, pinNumber, pinDriveDirection, pinTristateDirection, pinEnableValue, pinDisableValue,
+                               delayAfterEnable, delayAfterDisable, delayBeforeEnable, delayBeforeDisable };
         }
 
 
@@ -133,6 +139,7 @@ namespace ifx {
 
         void Kit2GoBoardSupport::enablePin(const pinCtrl &p, bool enable) {
             if( p.isSet ) {
+                delayMicroseconds(enable ? p.delayBeforeEnable : p.delayBeforeDisable);
                 digitalWrite(p.pinNumber, enable ? p.enableValue : p.disableValue);
                 delayMicroseconds(enable ? p.delayAfterEnable : p.delayAfterDisable);
             }

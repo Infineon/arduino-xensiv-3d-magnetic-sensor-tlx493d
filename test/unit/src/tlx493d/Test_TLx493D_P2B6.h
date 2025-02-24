@@ -23,7 +23,7 @@ static TLx493D_t dut;
 
 
 // define test group name
-TEST_GROUP(TLx493D_P2B6);
+// TEST_GROUP(TLx493D_P2B6);
 TEST_GROUP(TLx493D_P2B6_internal);
 
 

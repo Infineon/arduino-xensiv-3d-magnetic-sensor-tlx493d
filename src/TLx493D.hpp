@@ -162,13 +162,17 @@ namespace ifx {
                  * @param[in] pinDirection          Pin direction of the pin (OUTPUT, INPUT, INPUT-PULLUP).
                  * @param[in] pinEnableValue        Value to enable the power pin, depends on the pin (Active high or low).
                  * @param[in] pinDisableValue       Value to disable the power pin, depends on the pin (Active high or low).
-                 * @param[in] delayAfterEnable      Delay after enabling the power pin in [ms].
-                 * @param[in] delayAfterDisable     Delay after disabling the power pin in [ms].
+                 * @param[in] delayAfterEnable      Delay after enabling the power pin in [us].
+                 * @param[in] delayAfterDisable     Delay after disabling the power pin in [us].
+                 * @param[in] delayBeforeEnable     Delay before enabling the power pin in [us]. Needed to meet settling time constraints.  
+                 * @param[in] delayBeforeDisable    Delay before disabling the power pin in [us]. Needed to meet settling time constraints.
                  */
                 void setPowerPin(uint8_t pinNumber, uint8_t pinDriveDirection, uint8_t pinTristateDirection,
                                  uint8_t pinEnableValue, uint8_t pinDisableValue,
-                                 uint32_t delayAfterEnable = 0, uint32_t delayAfterDisable = 0) {
-                    bsc.setPowerPin(pinNumber, pinDriveDirection, pinTristateDirection, pinEnableValue, pinDisableValue, delayAfterEnable, delayAfterDisable);
+                                 uint32_t delayAfterEnable = 0, uint32_t delayAfterDisable = 0,
+                                 uint32_t delayBeforeEnable = 0, uint32_t delayBeforeDisable = 0) {
+                    bsc.setPowerPin(pinNumber, pinDriveDirection, pinTristateDirection, pinEnableValue, pinDisableValue,
+                                    delayAfterEnable, delayAfterDisable, delayBeforeEnable, delayBeforeDisable);
                 }
 
                 /**
@@ -185,15 +189,19 @@ namespace ifx {
                  * 
                  * @param[in] pinNumber             Pin number of the desired pin.
                  * @param[in] pinDirection          Pin direction of the pin (OUTPUT, INPUT, INPUT-PULLUP).
-                 * @param[in] pinEnableValue        Value to enable the power pin, depends on the pin (Active high or low).
-                 * @param[in] pinDisableValue       Value to disable the power pin, depends on the pin (Active high or low).
-                 * @param[in] delayAfterEnable      Delay after enabling the power pin in [ms]. 
-                 * @param[in] delayAfterDisable     Delay after disabling the power pin in [ms].
+                 * @param[in] pinEnableValue        Value to enable the select pin, depends on the pin (Active high or low).
+                 * @param[in] pinDisableValue       Value to disable the select pin, depends on the pin (Active high or low).
+                 * @param[in] delayAfterEnable      Delay after enabling the select pin in [us]. 
+                 * @param[in] delayAfterDisable     Delay after disabling the select pin in [us].
+                 * @param[in] delayBeforeEnable     Delay before enabling the select pin in [us]. Needed to meet settling time constraints.  
+                 * @param[in] delayBeforeDisable    Delay before disabling the select pin in [us]. Needed to meet settling time constraints.
                  */
                 void setSelectPin(uint8_t pinNumber, uint8_t pinDriveDirection, uint8_t pinTristateDirection,
                                   uint8_t pinEnableValue, uint8_t pinDisableValue,
-                                  uint32_t delayAfterEnable = 0, uint32_t delayAfterDisable = 0) {
-                    bsc.setSelectPin(pinNumber, pinDriveDirection, pinTristateDirection, pinEnableValue, pinDisableValue, delayAfterEnable, delayAfterDisable);
+                                  uint32_t delayAfterEnable = 0, uint32_t delayAfterDisable = 0,
+                                  uint32_t delayBeforeEnable = 0, uint32_t delayBeforeDisable = 0) {
+                    bsc.setSelectPin(pinNumber, pinDriveDirection, pinTristateDirection, pinEnableValue, pinDisableValue,
+                                     delayAfterEnable, delayAfterDisable, delayBeforeEnable, delayBeforeDisable);
                 }
 
                 /**
@@ -211,15 +219,19 @@ namespace ifx {
                  * 
                  * @param[in] pinNumber             Pin number of the desired pin.
                  * @param[in] pinDirection          Pin direction of the pin (OUTPUT, INPUT, INPUT-PULLUP).
-                 * @param[in] pinEnableValue        Value to enable the power pin, depends on the pin (Active high or low).
-                 * @param[in] pinDisableValue       Value to disable the power pin, depends on the pin (Active high or low).
-                 * @param[in] delayAfterEnable      Delay after enabling the power pin in [ms]. 
-                 * @param[in] delayAfterDisable     Delay after disabling the power pin in [ms].
+                 * @param[in] pinEnableValue        Value to enable the address pin, depends on the pin (Active high or low).
+                 * @param[in] pinDisableValue       Value to disable the address pin, depends on the pin (Active high or low).
+                 * @param[in] delayAfterEnable      Delay after enabling the address pin in [us]. 
+                 * @param[in] delayAfterDisable     Delay after disabling the address pin in [us].
+                 * @param[in] delayBeforeEnable     Delay before enabling the address pin in [us]. Needed to meet settling time constraints.  
+                 * @param[in] delayBeforeDisable    Delay before disabling the address pin in [us]. Needed to meet settling time constraints.
                  */
                 void setAddressPin(uint8_t pinNumber, uint8_t pinDriveDirection, uint8_t pinTristateDirection,
                                    uint8_t pinEnableValue, uint8_t pinDisableValue,
-                                   uint32_t delayAfterEnable = 0, uint32_t delayAfterDisable = 0) {
-                    bsc.setAddressPin(pinNumber, pinDriveDirection, pinTristateDirection, pinEnableValue, pinDisableValue, delayAfterEnable, delayAfterDisable);
+                                   uint32_t delayAfterEnable = 0, uint32_t delayAfterDisable = 0,
+                                   uint32_t delayBeforeEnable = 0, uint32_t delayBeforeDisable = 0) {
+                    bsc.setAddressPin(pinNumber, pinDriveDirection, pinTristateDirection, pinEnableValue, pinDisableValue,
+                                     delayAfterEnable, delayAfterDisable, delayBeforeEnable, delayBeforeDisable);
                 }
 
                 /**
@@ -424,13 +436,17 @@ namespace ifx {
                  * @param[in] pinDirection          Pin direction of the pin (OUTPUT, INPUT, INPUT-PULLUP).
                  * @param[in] pinEnableValue        Value to enable the power pin, depends on the pin (Active high or low).
                  * @param[in] pinDisableValue       Value to disable the power pin, depends on the pin (Active high or low).
-                 * @param[in] delayAfterEnable      Delay after enabling the power pin in [ms].
-                 * @param[in] delayAfterDisable     Delay after disabling the power pin in [ms].
+                 * @param[in] delayAfterEnable      Delay after enabling the power pin in [us].
+                 * @param[in] delayAfterDisable     Delay after disabling the power pin in [us].
+                 * @param[in] delayBeforeEnable     Delay before enabling the power pin in [us]. Needed to meet settling time constraints.  
+                 * @param[in] delayBeforeDisable    Delay before disabling the power pin in [us]. Needed to meet settling time constraints.
                  */
                 void setPowerPin(uint8_t pinNumber, uint8_t pinDriveDirection, uint8_t pinTristateDirection,
                                  uint8_t pinEnableValue, uint8_t pinDisableValue,
-                                 uint32_t delayAfterEnable = 0, uint32_t delayAfterDisable = 0) {
-                    bsc.setPowerPin(pinNumber, pinDriveDirection, pinTristateDirection, pinEnableValue, pinDisableValue, delayAfterEnable, delayAfterDisable);
+                                 uint32_t delayAfterEnable = 0, uint32_t delayAfterDisable = 0,
+                                 uint32_t delayBeforeEnable = 0, uint32_t delayBeforeDisable = 0) {
+                    bsc.setPowerPin(pinNumber, pinDriveDirection, pinTristateDirection, pinEnableValue, pinDisableValue,
+                                    delayAfterEnable, delayAfterDisable, delayBeforeEnable, delayBeforeDisable);
                 }
 
                 /**
@@ -449,13 +465,17 @@ namespace ifx {
                  * @param[in] pinDirection          Pin direction of the pin (OUTPUT, INPUT, INPUT-PULLUP).
                  * @param[in] pinEnableValue        Value to enable the power pin, depends on the pin (Active high or low).
                  * @param[in] pinDisableValue       Value to disable the power pin, depends on the pin (Active high or low).
-                 * @param[in] delayAfterEnable      Delay after enabling the power pin in [ms]. 
-                 * @param[in] delayAfterDisable     Delay after disabling the power pin in [ms].
+                 * @param[in] delayAfterEnable      Delay after enabling the select pin in [us]. 
+                 * @param[in] delayAfterDisable     Delay after disabling the select pin in [us].
+                 * @param[in] delayBeforeEnable     Delay before enabling the select pin in [us]. Needed to meet settling time constraints.  
+                 * @param[in] delayBeforeDisable    Delay before disabling the select pin in [us]. Needed to meet settling time constraints.
                  */
                 void setSelectPin(uint8_t pinNumber, uint8_t pinDriveDirection, uint8_t pinTristateDirection,
                                   uint8_t pinEnableValue, uint8_t pinDisableValue,
-                                  uint32_t delayAfterEnable = 0, uint32_t delayAfterDisable = 0) {
-                    bsc.setSelectPin(pinNumber, pinDriveDirection, pinTristateDirection, pinEnableValue, pinDisableValue, delayAfterEnable, delayAfterDisable);
+                                  uint32_t delayAfterEnable = 0, uint32_t delayAfterDisable = 0,
+                                  uint32_t delayBeforeEnable = 0, uint32_t delayBeforeDisable = 0) {
+                    bsc.setSelectPin(pinNumber, pinDriveDirection, pinTristateDirection, pinEnableValue, pinDisableValue,
+                                     delayAfterEnable, delayAfterDisable, delayBeforeEnable, delayBeforeDisable);
                 }
 
                 /**

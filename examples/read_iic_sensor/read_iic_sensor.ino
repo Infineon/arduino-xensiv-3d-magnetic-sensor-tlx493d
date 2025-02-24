@@ -28,7 +28,6 @@ using namespace ifx::tlx493d;
 /** P3XX evaluation board */
 const uint8_t POWER_PIN = 8;
 TLx493D_P3B6 dut(Wire, TLx493D_IIC_ADDR_A0_e);
-// TLx493D_P3B6 dut(Wire, TLx493D_IIC_ADDR_A1_e);
 
 
 /** Definition of the power pin and sensor objects for Arduino Uno boards */

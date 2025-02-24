@@ -344,42 +344,42 @@ bool TLx493D_A1B6_setIICAddress(TLx493D_t *sensor, TLx493D_IICAddressType_t addr
 
     switch (addr) {
         case TLx493D_IIC_ADDR_A0_e:
-            bitfieldValue = 0b00;
+            bitfieldValue = 0x00;
             deviceAddress = 0xBC;
             break;
 
         case TLx493D_IIC_ADDR_A1_e:
-            bitfieldValue = 0b01;
+            bitfieldValue = 0x01;
             deviceAddress = 0xB4;
             break;
 
         case TLx493D_IIC_ADDR_A2_e:
-            bitfieldValue = 0b10;
+            bitfieldValue = 0x02;
             deviceAddress = 0x9C;
             break;
 
         case TLx493D_IIC_ADDR_A3_e:
-            bitfieldValue = 0b11;
+            bitfieldValue = 0x03;
             deviceAddress = 0x94;
             break;
 
         case TLx493D_IIC_ADDR_A4_e:
-            bitfieldValue = 0b00;
+            bitfieldValue = 0x00;
             deviceAddress = 0x3E;
             break;
 
         case TLx493D_IIC_ADDR_A5_e:
-            bitfieldValue = 0b01;
+            bitfieldValue = 0x01;
             deviceAddress = 0x36;
             break;
 
         case TLx493D_IIC_ADDR_A6_e:
-            bitfieldValue = 0b10;
+            bitfieldValue = 0x02;
             deviceAddress = 0x1E;
             break;
 
         case TLx493D_IIC_ADDR_A7_e:
-            bitfieldValue = 0b11;
+            bitfieldValue = 0x03;
             deviceAddress = 0x16;
             break;        
 
@@ -671,7 +671,8 @@ void TLx493D_A1B6_setBitfield(TLx493D_t *sensor, uint8_t bitField, uint8_t newBi
     const TLx493D_Register_t *bf = &sensor->regDef[bitField];
     
     if(bf->accessMode == TLx493D_WRITE_MODE_e) {
-        sensor->regMap[bf->address + GEN_1_WRITE_REGISTERS_OFFSET] = (sensor->regMap[bf->address + GEN_1_WRITE_REGISTERS_OFFSET] & ~bf->mask) | (newBitFieldValue << bf->offset);
+        // sensor->regMap[bf->address + GEN_1_WRITE_REGISTERS_OFFSET] = (uint8_t) (sensor->regMap[bf->address + GEN_1_WRITE_REGISTERS_OFFSET] & ((uint8_t) ~bf->mask)) | (newBitFieldValue << bf->offset);
+        sensor->regMap[bf->address + GEN_1_WRITE_REGISTERS_OFFSET] = (uint8_t) ((sensor->regMap[bf->address + GEN_1_WRITE_REGISTERS_OFFSET] & ((uint8_t) ~bf->mask)) | ((newBitFieldValue << bf->offset) & bf->mask));
     }
     else {
         tlx493d_errorBitfieldNotWritableForSensorType(sensor, bitField);

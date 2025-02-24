@@ -92,8 +92,8 @@ TEST_TEAR_DOWN(TLx493D_A1B6_TempDisable)
 
 TEST(TLx493D_A1B6_TempDisable, TempDisable)
 {
-    // CH cannot be 0b11 when temperature measurement is disabled
-    TEST_ASSERT_NOT_EQUAL ( 0x3, tlx493d_common_returnBitfield(&dut, A1B6_CH_e) );
+    // CH cannot be 0x03 when temperature measurement is disabled
+    TEST_ASSERT_NOT_EQUAL ( 0x03, tlx493d_common_returnBitfield(&dut, A1B6_CH_e) );
 
     double temperature = 0.0;
     TEST_ASSERT_EQUAL( true, dut.functions->getTemperature(&dut, &temperature));

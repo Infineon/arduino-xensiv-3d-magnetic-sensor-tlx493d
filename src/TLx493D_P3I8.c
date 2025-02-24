@@ -265,6 +265,16 @@ bool TLx493D_P3I8_setSensitivity(TLx493D_t *sensor, TLx493D_SensitivityType_t va
 
 
 bool TLx493D_P3I8_setDefaultConfig(TLx493D_t *sensor) {
+    /*
+    tlx493d_common_setBitfield(sensor, P3I8_TRIGGER_SEL_e, 2);
+    tlx493d_common_setBitfield(sensor, P3I8_INT_DIS_e, 1);
+    tlx493d_common_setBitfield(sensor, P3I8_MODE_SEL_e, 1);
+    bool b = tlx493d_common_writeRegister(sensor, P3I8_MODE_SEL_e);
+
+    tlx493d_common_setBitfield(sensor, P3I8_CHANNEL_SEL_e, 0);
+    b |= tlx493d_common_writeRegister(sensor, P3I8_CHANNEL_SEL_e);
+    */
+
     tlx493d_common_setBitfield(sensor, P3I8_INT_DIS_e, 1);
     bool b = tlx493d_common_writeRegister(sensor, P3I8_MODE_SEL_e);
 

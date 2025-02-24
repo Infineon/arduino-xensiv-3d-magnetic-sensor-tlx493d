@@ -22,15 +22,15 @@ static void tlx493d_gen_3_shiftDataInRegisters(TLx493D_t *sensor, uint8_t channe
 
     switch(channel) {
         /** TLx493D_BxTemp_e */
-        case 0b1100 : offset = 2;
+        case 0x0C : offset = 2;
                       break;
 
         /** TLx493D_BxBy_e */
-        case 0b1101 : offset = 4;
+        case 0x0D : offset = 4;
                       break;
         
         /** TLx493D_BzTemp_e */
-        case 0b1110 : offset = 0;
+        case 0x0E : offset = 0;
                       break;
         
         default : return;
@@ -128,27 +128,27 @@ bool tlx493d_gen_3_setMeasurement(TLx493D_t *sensor, uint8_t channelBF, uint8_t 
     uint8_t channel = 0;
 
     switch(val) {
-        case TLx493D_BxByBzTemp_e : channel = 0b0000;
+        case TLx493D_BxByBzTemp_e : channel = 0x00;
                                     break;
 
 /*
-        case TLx493D_VHall_Bias_e : channel = 0b0001;
+        case TLx493D_VHall_Bias_e : channel = 0x01;
                                     break;
         
-        case TLx493D_Spintest_e : channel = 0b0010;
+        case TLx493D_Spintest_e : channel = 0x02;
                                   break;
 
-        case TLx493D_SAT_test_e : channel = 0b1000;
+        case TLx493D_SAT_test_e : channel = 0x08;
                                   break;
 */
 
-        case TLx493D_BxTemp_e : channel = 0b1100;
+        case TLx493D_BxTemp_e : channel = 0x0C;
                                 break;
 
-        case TLx493D_BxBy_e : channel = 0b1101;
+        case TLx493D_BxBy_e : channel = 0x0D;
                               break;
         
-        case TLx493D_BzTemp_e : channel = 0b1110;
+        case TLx493D_BzTemp_e : channel = 0x0E;
                                 break;
         
         default : tlx493d_errorSelectionNotSupportedForSensorType(sensor, val, "TLx493D_MeasurementType_t");
@@ -167,13 +167,13 @@ bool tlx493d_gen_3_setTrigger(TLx493D_t *sensor, uint8_t trigBF, TLx493D_Trigger
     uint8_t trig = 0;
 
     switch(val) {
-        case TLx493D_NO_TRIGGER_e : trig = 0b00;
+        case TLx493D_NO_TRIGGER_e : trig = 0x00;
                                     break;
 
-        case TLx493D_ADC_ON_READ_e : trig = 0b01;
+        case TLx493D_ADC_ON_READ_e : trig = 0x01;
                                      break;
         
-        case TLx493D_ADC_ON_STOP_CONDITION_e : trig = 0b10;
+        case TLx493D_ADC_ON_STOP_CONDITION_e : trig = 0x02;
                                                break;
         
         default : tlx493d_errorSelectionNotSupportedForSensorType(sensor, val, "TLx493D_TriggerType_t");
@@ -253,10 +253,10 @@ bool tlx493d_gen_3_setPowerMode(TLx493D_t *sensor, uint8_t modeBF, TLx493D_Power
     uint8_t mode = 0;
 
     switch(val) {
-        case TLx493D_LOW_POWER_MODE_e : mode = 0b0;
+        case TLx493D_LOW_POWER_MODE_e : mode = 0x00;
                                         break;
 
-        case TLx493D_MASTER_CONTROLLED_MODE_e : mode = 0b1;
+        case TLx493D_MASTER_CONTROLLED_MODE_e : mode = 0x01;
                                                 break;
 
         default : tlx493d_errorSelectionNotSupportedForSensorType(sensor, val, "TLx493D_PowerModeType_t");
@@ -272,16 +272,16 @@ bool tlx493d_gen_3_setUpdateRate(TLx493D_t *sensor, uint8_t fUpdateBF, TLx493D_U
     uint8_t rate = 0;
 
     switch(val) {
-        case TLx493D_UPDATE_RATE_1000_HZ_e : rate = 0b00;
+        case TLx493D_UPDATE_RATE_1000_HZ_e : rate = 0x00;
                                              break;
 
-        case TLx493D_UPDATE_RATE_125_HZ_e : rate = 0b01;
+        case TLx493D_UPDATE_RATE_125_HZ_e : rate = 0x01;
                                             break;
 
-        case TLx493D_UPDATE_RATE_31_HZ_e : rate = 0b10;
+        case TLx493D_UPDATE_RATE_31_HZ_e : rate = 0x02;
                                            break;
 
-        case TLx493D_UPDATE_RATE_16_HZ_e : rate = 0b11;
+        case TLx493D_UPDATE_RATE_16_HZ_e : rate = 0x03;
                                            break;
 
         default : tlx493d_errorSelectionNotSupportedForSensorType(sensor, val, "TLx493D_UpdateRateType_t");

@@ -70,7 +70,7 @@ namespace ifx {
                     if( (txLen > 0) && (txBuffer != NULL) ) {
                         iic->beginTransmission(iicAddress);
 
-                        uint8_t bytesWritten = iic->write(txBuffer, txLen);
+                        uint8_t bytesWritten = (uint8_t) iic->write(txBuffer, txLen);
                         iic->endTransmission(true);
 
                         if( bytesWritten != txLen ) {
@@ -82,7 +82,7 @@ namespace ifx {
                         uint8_t bytesRead = iic->requestFrom(iicAddress, rxLen);
 
                         for(uint16_t i = 0; (i < rxLen) && (iic->available() > 0); ++i) {
-                            rxBuffer[i] = iic->read();
+                            rxBuffer[i] = (uint8_t) iic->read();
                         }
 
                         if( bytesRead != rxLen ) {

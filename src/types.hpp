@@ -18,7 +18,7 @@ namespace ifx {
         using TLx493D_P3B6 = TLx493D<Kit2GoBoardSupport, TwoWireWrapper, TLx493D_P3B6_e>;
 
         using TLx493D_P3I8 = TLx493D<Kit2GoBoardSupport, SPIClassWrapper, TLx493D_P3I8_e>;
-    }
-}
+    } // namespace tlx493d
+} // namespace ifx
 
 #endif // TLX493D_ARDUINO_TYPES_H

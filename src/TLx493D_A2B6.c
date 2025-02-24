@@ -246,27 +246,27 @@ bool TLx493D_A2B6_setSensitivity(TLx493D_t *sensor, TLx493D_SensitivityType_t va
 
 /*
 bool TLx493D_A2B6_setTC0MagneticTemperatureCompensation(TLx493D_t *sensor) {
-    return tlx493d_gen_2_setMagneticTemperatureCompensation(sensor, A2B6_TL_MAG_e, A2B6_CP_e, 0b00);
+    return tlx493d_gen_2_setMagneticTemperatureCompensation(sensor, A2B6_TL_MAG_e, A2B6_CP_e, 0x00);
 }
 */
 
 /*
 bool TLx493D_A2B6_setTC1MagneticTemperatureCompensation(TLx493D_t *sensor) {
-    return tlx493d_gen_2_setMagneticTemperatureCompensation(sensor, A2B6_TL_MAG_e, A2B6_CP_e, 0b01);
+    return tlx493d_gen_2_setMagneticTemperatureCompensation(sensor, A2B6_TL_MAG_e, A2B6_CP_e, 0x01);
 }
 */
 
 
 /*
 bool TLx493D_A2B6_setTC2MagneticTemperatureCompensation(TLx493D_t *sensor) {
-    return tlx493d_gen_2_setMagneticTemperatureCompensation(sensor, A2B6_TL_MAG_e, A2B6_CP_e, 0b10);
+    return tlx493d_gen_2_setMagneticTemperatureCompensation(sensor, A2B6_TL_MAG_e, A2B6_CP_e, 0x02);
 }
 */
 
 
 /*
 bool TLx493D_A2B6_setTC3MagneticTemperatureCompensation(TLx493D_t *sensor) {
-    return tlx493d_gen_2_setMagneticTemperatureCompensation(sensor, A2B6_TL_MAG_e, A2B6_CP_e, 0b11);
+    return tlx493d_gen_2_setMagneticTemperatureCompensation(sensor, A2B6_TL_MAG_e, A2B6_CP_e, 0x03);
 }
 */
 

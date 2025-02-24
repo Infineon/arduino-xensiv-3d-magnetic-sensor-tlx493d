@@ -81,7 +81,12 @@ namespace ifx {
 
         bool initCommunication(TLx493D_t *sensor, SPIClassWrapper &spi, bool executeInit,
                                uint32_t pClockFreq, uint8_t pBitOrder, uint8_t pDataMode) {
-            sensor->comInterface.comLibObj.spi_obj                = (TLx493D_SPIObject_t *) malloc(sizeof(TLx493D_SPIObject_t));
+            sensor->comInterface.comLibObj.spi_obj = (TLx493D_SPIObject_t *) malloc(sizeof(TLx493D_SPIObject_t));
+
+            if( sensor->comInterface.comLibObj.spi_obj == NULL ) {
+                return( false );
+            }
+
             sensor->comInterface.comLibObj.spi_obj->spi           = &spi;
             sensor->comInterface.comLibObj.spi_obj->isToBeDeleted = false;
 
@@ -100,7 +105,12 @@ namespace ifx {
 
 
         bool initCommunication(TLx493D_t *sensor, SPIClass &spi, bool executeInit, uint32_t pClockFreq, uint8_t pBitOrder, uint8_t pDataMode) {
-            sensor->comInterface.comLibObj.spi_obj                = (TLx493D_SPIObject_t *) malloc(sizeof(TLx493D_SPIObject_t));
+            sensor->comInterface.comLibObj.spi_obj = (TLx493D_SPIObject_t *) malloc(sizeof(TLx493D_SPIObject_t));
+
+            if( sensor->comInterface.comLibObj.spi_obj == NULL ) {
+                return( false );
+            }
+
             sensor->comInterface.comLibObj.spi_obj->spi           = new SPIClassWrapper(spi);
             sensor->comInterface.comLibObj.spi_obj->isToBeDeleted = true;
 

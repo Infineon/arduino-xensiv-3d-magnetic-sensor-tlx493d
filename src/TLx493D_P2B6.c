@@ -304,7 +304,7 @@ bool TLx493D_P2B6_hasValidData(const TLx493D_t *sensor) {
     return( tlx493d_gen_2_hasValidData(sensor, P2B6_MODE_e, P2B6_PD3_e, P2B6_PD0_e) );
 
 /*
-    return( tlx493d_gen_2_hasValidData(sensor) && (tlx493d_common_returnBitfield(sensor, P2B6_MODE_e) == 0b11 ? true
+    return( tlx493d_gen_2_hasValidData(sensor) && (tlx493d_common_returnBitfield(sensor, P2B6_MODE_e) == 0x03 ? true
                                                                        : (tlx493d_common_returnBitfield(sensor, P2B6_PD0_e) == 1) && (tlx493d_common_returnBitfield(sensor, P2B6_PD3_e) == 1) );
 */                                                
 }

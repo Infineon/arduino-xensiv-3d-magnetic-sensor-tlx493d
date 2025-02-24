@@ -14,7 +14,7 @@
 
 
 // define test group name
-TEST_GROUP(SensorsGen2Common);
+// TEST_GROUP(SensorsGen2Common);
 
 
 // // Setup method called before every individual test defined for this test group

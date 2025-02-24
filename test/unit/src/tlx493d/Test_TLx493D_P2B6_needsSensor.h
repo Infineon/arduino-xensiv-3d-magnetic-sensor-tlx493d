@@ -21,7 +21,7 @@ static TLx493D_t dut;
 
 
 // define test group name
-TEST_GROUP(TLx493D_P2B6_needsSensor);
+// TEST_GROUP(TLx493D_P2B6_needsSensor);
 TEST_GROUP(TLx493D_P2B6_needsSensorInternal);
 
 
@@ -201,8 +201,8 @@ TEST_IFX(TLx493D_P2B6_needsSensorInternal, checkConfigTriggerFunctionality)
     // try triggers
     TEST_ASSERT_TRUE( dut.functions->setTrigger(&dut, TLx493D_ADC_ON_READ_AFTER_REG_05_e) );
     TEST_ASSERT_TRUE( dut.functions->readRegistersAndCheck(&dut));
-    TEST_ASSERT_GREATER_OR_EQUAL_INT8( 0b10, tlx493d_common_returnBitfield(&dut, P2B6_TRIG_e) );
-    TEST_ASSERT_LESS_OR_EQUAL_INT8( 0b11, tlx493d_common_returnBitfield(&dut, P2B6_TRIG_e) );
+    TEST_ASSERT_GREATER_OR_EQUAL_INT8( 0x02, tlx493d_common_returnBitfield(&dut, P2B6_TRIG_e) );
+    TEST_ASSERT_LESS_OR_EQUAL_INT8( 0x03, tlx493d_common_returnBitfield(&dut, P2B6_TRIG_e) );
 
     // Not to be used with our default config CA = 0, INT = 1 !
     // TEST_ASSERT_TRUE( dut.functions->setTrigger(&dut, TLx493D_ADC_ON_READ_BEFORE_FIRST_MSB_e) );
@@ -333,42 +333,42 @@ TEST_IFX(TLx493D_P2B6_needsSensorInternal, checkModeUpdateRateFunctionality)
     // Supported
     TEST_ASSERT_TRUE( dut.functions->setUpdateRate(&dut, TLx493D_UPDATE_RATE_97_HZ_e) );
     TEST_ASSERT_TRUE( dut.functions->readRegistersAndCheck(&dut));
-    TEST_ASSERT_EQUAL_HEX8( 0b001, tlx493d_common_returnBitfield(&dut, P2B6_PRD_e) );
+    TEST_ASSERT_EQUAL_HEX8( 0x01, tlx493d_common_returnBitfield(&dut, P2B6_PRD_e) );
 
 
     TEST_ASSERT_TRUE( dut.functions->setUpdateRate(&dut, TLx493D_UPDATE_RATE_24_HZ_e) );
     TEST_ASSERT_TRUE( dut.functions->readRegistersAndCheck(&dut));
-    TEST_ASSERT_EQUAL_HEX8( 0b010, tlx493d_common_returnBitfield(&dut, P2B6_PRD_e) );
+    TEST_ASSERT_EQUAL_HEX8( 0x02, tlx493d_common_returnBitfield(&dut, P2B6_PRD_e) );
 
 
     TEST_ASSERT_TRUE( dut.functions->setUpdateRate(&dut, TLx493D_UPDATE_RATE_12_HZ_e) );
     TEST_ASSERT_TRUE( dut.functions->readRegistersAndCheck(&dut));
-    TEST_ASSERT_EQUAL_HEX8( 0b011, tlx493d_common_returnBitfield(&dut, P2B6_PRD_e) );
+    TEST_ASSERT_EQUAL_HEX8( 0x03, tlx493d_common_returnBitfield(&dut, P2B6_PRD_e) );
 
 
     TEST_ASSERT_TRUE( dut.functions->setUpdateRate(&dut, TLx493D_UPDATE_RATE_6_HZ_e) );
     TEST_ASSERT_TRUE( dut.functions->readRegistersAndCheck(&dut));
-    TEST_ASSERT_EQUAL_HEX8( 0b100, tlx493d_common_returnBitfield(&dut, P2B6_PRD_e) );
+    TEST_ASSERT_EQUAL_HEX8( 0x04, tlx493d_common_returnBitfield(&dut, P2B6_PRD_e) );
 
 
     TEST_ASSERT_TRUE( dut.functions->setUpdateRate(&dut, TLx493D_UPDATE_RATE_3_HZ_e) );
     TEST_ASSERT_TRUE( dut.functions->readRegistersAndCheck(&dut));
-    TEST_ASSERT_EQUAL_HEX8( 0b101, tlx493d_common_returnBitfield(&dut, P2B6_PRD_e) );
+    TEST_ASSERT_EQUAL_HEX8( 0x05, tlx493d_common_returnBitfield(&dut, P2B6_PRD_e) );
 
 
     TEST_ASSERT_TRUE( dut.functions->setUpdateRate(&dut, TLx493D_UPDATE_RATE_0_4_HZ_e) );
     TEST_ASSERT_TRUE( dut.functions->readRegistersAndCheck(&dut));
-    TEST_ASSERT_EQUAL_HEX8( 0b110, tlx493d_common_returnBitfield(&dut, P2B6_PRD_e) );
+    TEST_ASSERT_EQUAL_HEX8( 0x06, tlx493d_common_returnBitfield(&dut, P2B6_PRD_e) );
 
 
     TEST_ASSERT_TRUE( dut.functions->setUpdateRate(&dut, TLx493D_UPDATE_RATE_0_05_HZ_e) );
     TEST_ASSERT_TRUE( dut.functions->readRegistersAndCheck(&dut));
-    TEST_ASSERT_EQUAL_HEX8( 0b111, tlx493d_common_returnBitfield(&dut, P2B6_PRD_e) );
+    TEST_ASSERT_EQUAL_HEX8( 0x07, tlx493d_common_returnBitfield(&dut, P2B6_PRD_e) );
 
 
     TEST_ASSERT_TRUE( dut.functions->setUpdateRate(&dut, TLx493D_UPDATE_RATE_770_HZ_e) );
     TEST_ASSERT_TRUE( dut.functions->readRegistersAndCheck(&dut));
-    TEST_ASSERT_EQUAL_HEX8( 0b000, tlx493d_common_returnBitfield(&dut, P2B6_PRD_e) );
+    TEST_ASSERT_EQUAL_HEX8( 0x00, tlx493d_common_returnBitfield(&dut, P2B6_PRD_e) );
 
 
     // Unsupported

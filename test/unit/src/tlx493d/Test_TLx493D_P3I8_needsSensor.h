@@ -21,7 +21,7 @@ static TLx493D_t dut;
 
 
 // define test group name
-TEST_GROUP(TLx493D_P3I8_needsSensor);
+// TEST_GROUP(TLx493D_P3I8_needsSensor);
 TEST_GROUP(TLx493D_P3I8_needsSensorInternal);
 
 
@@ -198,29 +198,29 @@ TEST_IFX(TLx493D_P3I8_needsSensorInternal, checkConfigMeasurementFunctionality)
     // logPrint("TLx493D_BxTemp_e\n");
     TEST_ASSERT_TRUE( dut.functions->setMeasurement(&dut, TLx493D_BxTemp_e) );
     TEST_ASSERT_TRUE( dut.functions->readRegisters(&dut));
-    TEST_ASSERT_EQUAL_HEX8( 0b1100, tlx493d_common_returnBitfield(&dut, P3I8_CHANNEL_SEL_e) );
-    TEST_ASSERT_EQUAL_HEX8( 0b1100, tlx493d_common_returnBitfield(&dut, P3I8_CHANNEL_SEL_SAVE_e) );
+    TEST_ASSERT_EQUAL_HEX8( 0x0C, tlx493d_common_returnBitfield(&dut, P3I8_CHANNEL_SEL_e) );
+    TEST_ASSERT_EQUAL_HEX8( 0x0C, tlx493d_common_returnBitfield(&dut, P3I8_CHANNEL_SEL_SAVE_e) );
    
 
     // logPrint("TLx493D_BxBy_e\n");
     TEST_ASSERT_TRUE( dut.functions->setMeasurement(&dut, TLx493D_BxBy_e) );
     TEST_ASSERT_TRUE( dut.functions->readRegisters(&dut));
-    TEST_ASSERT_EQUAL_HEX8( 0b1101, tlx493d_common_returnBitfield(&dut, P3I8_CHANNEL_SEL_e) );
-    TEST_ASSERT_EQUAL_HEX8( 0b1101, tlx493d_common_returnBitfield(&dut, P3I8_CHANNEL_SEL_SAVE_e) );
+    TEST_ASSERT_EQUAL_HEX8( 0x0D, tlx493d_common_returnBitfield(&dut, P3I8_CHANNEL_SEL_e) );
+    TEST_ASSERT_EQUAL_HEX8( 0x0D, tlx493d_common_returnBitfield(&dut, P3I8_CHANNEL_SEL_SAVE_e) );
 
 
     // logPrint("TLx493D_BzTemp_e\n");
     TEST_ASSERT_TRUE( dut.functions->setMeasurement(&dut, TLx493D_BzTemp_e) );
     TEST_ASSERT_TRUE( dut.functions->readRegisters(&dut));
-    TEST_ASSERT_EQUAL_HEX8( 0b1110, tlx493d_common_returnBitfield(&dut, P3I8_CHANNEL_SEL_e) );
-    TEST_ASSERT_EQUAL_HEX8( 0b1110, tlx493d_common_returnBitfield(&dut, P3I8_CHANNEL_SEL_SAVE_e) );
+    TEST_ASSERT_EQUAL_HEX8( 0x0E, tlx493d_common_returnBitfield(&dut, P3I8_CHANNEL_SEL_e) );
+    TEST_ASSERT_EQUAL_HEX8( 0x0E, tlx493d_common_returnBitfield(&dut, P3I8_CHANNEL_SEL_SAVE_e) );
 
 
     // logPrint("TLx493D_BxByBzTemp_e\n");
     TEST_ASSERT_TRUE( dut.functions->setMeasurement(&dut, TLx493D_BxByBzTemp_e) );
     TEST_ASSERT_TRUE( dut.functions->readRegisters(&dut));
-    TEST_ASSERT_EQUAL_HEX8( 0b0000, tlx493d_common_returnBitfield(&dut, P3I8_CHANNEL_SEL_e) );
-    TEST_ASSERT_EQUAL_HEX8( 0b0000, tlx493d_common_returnBitfield(&dut, P3I8_CHANNEL_SEL_SAVE_e) );
+    TEST_ASSERT_EQUAL_HEX8( 0x00, tlx493d_common_returnBitfield(&dut, P3I8_CHANNEL_SEL_e) );
+    TEST_ASSERT_EQUAL_HEX8( 0x00, tlx493d_common_returnBitfield(&dut, P3I8_CHANNEL_SEL_SAVE_e) );
 
 
     // switch to MCM
@@ -233,29 +233,29 @@ TEST_IFX(TLx493D_P3I8_needsSensorInternal, checkConfigMeasurementFunctionality)
     // logPrint("TLx493D_BxTemp_e\n");
     TEST_ASSERT_TRUE( dut.functions->setMeasurement(&dut, TLx493D_BxTemp_e) );
     TEST_ASSERT_TRUE( dut.functions->readRegisters(&dut));
-    TEST_ASSERT_EQUAL_HEX8( 0b1100, tlx493d_common_returnBitfield(&dut, P3I8_CHANNEL_SEL_e) );
-    TEST_ASSERT_EQUAL_HEX8( 0b1100, tlx493d_common_returnBitfield(&dut, P3I8_CHANNEL_SEL_SAVE_e) );
+    TEST_ASSERT_EQUAL_HEX8( 0x0C, tlx493d_common_returnBitfield(&dut, P3I8_CHANNEL_SEL_e) );
+    TEST_ASSERT_EQUAL_HEX8( 0x0C, tlx493d_common_returnBitfield(&dut, P3I8_CHANNEL_SEL_SAVE_e) );
    
 
     // logPrint("TLx493D_BxBy_e\n");
     TEST_ASSERT_TRUE( dut.functions->setMeasurement(&dut, TLx493D_BxBy_e) );
     TEST_ASSERT_TRUE( dut.functions->readRegisters(&dut));
-    TEST_ASSERT_EQUAL_HEX8( 0b1101, tlx493d_common_returnBitfield(&dut, P3I8_CHANNEL_SEL_e) );
-    TEST_ASSERT_EQUAL_HEX8( 0b1101, tlx493d_common_returnBitfield(&dut, P3I8_CHANNEL_SEL_SAVE_e) );
+    TEST_ASSERT_EQUAL_HEX8( 0x0D, tlx493d_common_returnBitfield(&dut, P3I8_CHANNEL_SEL_e) );
+    TEST_ASSERT_EQUAL_HEX8( 0x0D, tlx493d_common_returnBitfield(&dut, P3I8_CHANNEL_SEL_SAVE_e) );
 
 
     // logPrint("TLx493D_BzTemp_e\n");
     TEST_ASSERT_TRUE( dut.functions->setMeasurement(&dut, TLx493D_BzTemp_e) );
     TEST_ASSERT_TRUE( dut.functions->readRegisters(&dut));
-    TEST_ASSERT_EQUAL_HEX8( 0b1110, tlx493d_common_returnBitfield(&dut, P3I8_CHANNEL_SEL_e) );
-    TEST_ASSERT_EQUAL_HEX8( 0b1110, tlx493d_common_returnBitfield(&dut, P3I8_CHANNEL_SEL_SAVE_e) );
+    TEST_ASSERT_EQUAL_HEX8( 0x0E, tlx493d_common_returnBitfield(&dut, P3I8_CHANNEL_SEL_e) );
+    TEST_ASSERT_EQUAL_HEX8( 0x0E, tlx493d_common_returnBitfield(&dut, P3I8_CHANNEL_SEL_SAVE_e) );
 
 
     // logPrint("TLx493D_BxByBzTemp_e\n");
     TEST_ASSERT_TRUE( dut.functions->setMeasurement(&dut, TLx493D_BxByBzTemp_e) );
     TEST_ASSERT_TRUE( dut.functions->readRegisters(&dut));
-    TEST_ASSERT_EQUAL_HEX8( 0b0000, tlx493d_common_returnBitfield(&dut, P3I8_CHANNEL_SEL_e) );
-    TEST_ASSERT_EQUAL_HEX8( 0b0000, tlx493d_common_returnBitfield(&dut, P3I8_CHANNEL_SEL_SAVE_e) );
+    TEST_ASSERT_EQUAL_HEX8( 0x00, tlx493d_common_returnBitfield(&dut, P3I8_CHANNEL_SEL_e) );
+    TEST_ASSERT_EQUAL_HEX8( 0x00, tlx493d_common_returnBitfield(&dut, P3I8_CHANNEL_SEL_SAVE_e) );
 
 
     // switch to LPM
@@ -279,18 +279,18 @@ TEST_IFX(TLx493D_P3I8_needsSensorInternal, checkConfigTriggerFunctionality)
     TEST_ASSERT_FALSE( dut.functions->setTrigger(&dut, TLx493D_ADC_ON_STOP_CONDITION_e) );
     // TEST_ASSERT_TRUE( dut.functions->setTrigger(&dut, TLx493D_ADC_ON_STOP_CONDITION_e) );
     // TEST_ASSERT_TRUE( dut.functions->readRegisters(&dut));
-    // TEST_ASSERT_GREATER_OR_EQUAL_INT8( 0b10, tlx493d_common_returnBitfield(&dut, P3I8_TRIGGER_SEL_e) );
-    // TEST_ASSERT_LESS_OR_EQUAL_INT8( 0b11, tlx493d_common_returnBitfield(&dut, P3I8_TRIGGER_SEL_e) );
+    // TEST_ASSERT_GREATER_OR_EQUAL_INT8( 0x02, tlx493d_common_returnBitfield(&dut, P3I8_TRIGGER_SEL_e) );
+    // TEST_ASSERT_LESS_OR_EQUAL_INT8( 0x03, tlx493d_common_returnBitfield(&dut, P3I8_TRIGGER_SEL_e) );
 
     //
     TEST_ASSERT_TRUE( dut.functions->setTrigger(&dut, TLx493D_ADC_ON_READ_e) );
     TEST_ASSERT_TRUE( dut.functions->readRegisters(&dut));
-    TEST_ASSERT_EQUAL_HEX8( 0b01, tlx493d_common_returnBitfield(&dut, P3I8_TRIGGER_SEL_e) );
+    TEST_ASSERT_EQUAL_HEX8( 0x01, tlx493d_common_returnBitfield(&dut, P3I8_TRIGGER_SEL_e) );
 
     //
     TEST_ASSERT_TRUE( dut.functions->setTrigger(&dut, TLx493D_NO_TRIGGER_e) );
     TEST_ASSERT_TRUE( dut.functions->readRegisters(&dut));
-    TEST_ASSERT_EQUAL_HEX8( 0b00, tlx493d_common_returnBitfield(&dut, P3I8_TRIGGER_SEL_e) );
+    TEST_ASSERT_EQUAL_HEX8( 0x00, tlx493d_common_returnBitfield(&dut, P3I8_TRIGGER_SEL_e) );
 
 
     // switch back to LPM
@@ -385,19 +385,19 @@ TEST_IFX(TLx493D_P3I8_needsSensorInternal, checkModeUpdateRateFunctionality)
     // Supported
     TEST_ASSERT_TRUE( dut.functions->setUpdateRate(&dut, TLx493D_UPDATE_RATE_125_HZ_e) );
     TEST_ASSERT_TRUE( dut.functions->readRegistersAndCheck(&dut));
-    TEST_ASSERT_EQUAL_HEX8( 0b01, tlx493d_common_returnBitfield(&dut, P3I8_F_UPDATE_SEL_e) );
+    TEST_ASSERT_EQUAL_HEX8( 0x01, tlx493d_common_returnBitfield(&dut, P3I8_F_UPDATE_SEL_e) );
 
     TEST_ASSERT_TRUE( dut.functions->setUpdateRate(&dut, TLx493D_UPDATE_RATE_31_HZ_e) );
     TEST_ASSERT_TRUE( dut.functions->readRegistersAndCheck(&dut));
-    TEST_ASSERT_EQUAL_HEX8( 0b10, tlx493d_common_returnBitfield(&dut, P3I8_F_UPDATE_SEL_e) );
+    TEST_ASSERT_EQUAL_HEX8( 0x02, tlx493d_common_returnBitfield(&dut, P3I8_F_UPDATE_SEL_e) );
 
     TEST_ASSERT_TRUE( dut.functions->setUpdateRate(&dut, TLx493D_UPDATE_RATE_16_HZ_e) );
     TEST_ASSERT_TRUE( dut.functions->readRegistersAndCheck(&dut));
-    TEST_ASSERT_EQUAL_HEX8( 0b11, tlx493d_common_returnBitfield(&dut, P3I8_F_UPDATE_SEL_e) );
+    TEST_ASSERT_EQUAL_HEX8( 0x03, tlx493d_common_returnBitfield(&dut, P3I8_F_UPDATE_SEL_e) );
 
     TEST_ASSERT_TRUE( dut.functions->setUpdateRate(&dut, TLx493D_UPDATE_RATE_1000_HZ_e) );
     TEST_ASSERT_TRUE( dut.functions->readRegistersAndCheck(&dut));
-    TEST_ASSERT_EQUAL_HEX8( 0b00, tlx493d_common_returnBitfield(&dut, P3I8_F_UPDATE_SEL_e) );
+    TEST_ASSERT_EQUAL_HEX8( 0x00, tlx493d_common_returnBitfield(&dut, P3I8_F_UPDATE_SEL_e) );
 
 
     // Unsupported

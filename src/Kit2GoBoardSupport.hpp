@@ -82,12 +82,15 @@ namespace ifx {
                  * @param[in] pinTristateDirection Direction of the Arduino pin when in tristate.
                  * @param[in] pinEnableValue Value of the pin in enabled state.
                  * @param[in] pinDisableValue Value of the pin in disabled state.
-                 * @param[in] delayAfterEnable delay in ms after the pin is enabled. Needed to meet settling time constraints.  
-                 * @param[in] delayAfterDisable delay in ms after the pin is disabled. Needed to meet settling time constraints.
+                 * @param[in] delayAfterEnable delay in us after the pin is enabled. Needed to meet settling time constraints.  
+                 * @param[in] delayAfterDisable delay in us after the pin is disabled. Needed to meet settling time constraints.
+                 * @param[in] delayBeforeEnable delay in us before the pin is enabled. Needed to meet settling time constraints.  
+                 * @param[in] delayBeforeDisable delay in us before the pin is disabled. Needed to meet settling time constraints.
                  */
                 void setPowerPin(uint8_t pinNumber, uint8_t pinDriveDirection, uint8_t pinTristateDirection,
                                  uint8_t pinEnableValue, uint8_t pinDisableValue,
-                                 uint32_t delayAfterEnable = 0, uint32_t delayAfterDisable = 0);
+                                 uint32_t delayAfterEnable = 0, uint32_t delayAfterDisable = 0,
+                                 uint32_t delayBeforeEnable = 0, uint32_t delayBeforeDisable = 0);
 
 
                 /**
@@ -103,12 +106,15 @@ namespace ifx {
                  * @param[in] pinTristateDirection Direction of the Arduino pin when in tristate.
                  * @param[in] pinEnableValue Value of the pin in enabled state.
                  * @param[in] pinDisableValue Value of the pin in disabled state.
-                 * @param[in] delayAfterEnable delay in ms after the pin is enabled. Needed to meet settling time constraints.
-                 * @param[in] delayAfterDisable delay in ms after the pin is disabled. Needed to meet settling time constraints.
+                 * @param[in] delayAfterEnable delay in us after the pin is enabled. Needed to meet settling time constraints.
+                 * @param[in] delayAfterDisable delay in us after the pin is disabled. Needed to meet settling time constraints.
+                 * @param[in] delayBeforeEnable delay in us before the pin is enabled. Needed to meet settling time constraints.  
+                 * @param[in] delayBeforeDisable delay in us before the pin is disabled. Needed to meet settling time constraints.
                  */
                 void setSelectPin(uint8_t pinNumber, uint8_t pinDriveDirection, uint8_t pinTristateDirection,
                                   uint8_t pinEnableValue, uint8_t pinDisableValue,
-                                  uint32_t delayAfterEnable = 0, uint32_t delayAfterDisable = 0);
+                                  uint32_t delayAfterEnable = 0, uint32_t delayAfterDisable = 0,
+                                  uint32_t delayBeforeEnable = 0, uint32_t delayBeforeDisable = 0);
 
 
                 /**
@@ -125,12 +131,15 @@ namespace ifx {
                  * @param[in] pinTristateDirection Direction of the Arduino pin when in tristate.
                  * @param[in] pinEnableValue Value of the pin in enabled state.
                  * @param[in] pinDisableValue Value of the pin in disabled state.
-                 * @param[in] delayAfterEnable delay in ms after the pin is enabled. Needed to meet settling time constraints.
-                 * @param[in] delayAfterDisable delay in ms after the pin is disabled. Needed to meet settling time constraints.
+                 * @param[in] delayAfterEnable delay in us after the pin is enabled. Needed to meet settling time constraints.
+                 * @param[in] delayAfterDisable delay in us after the pin is disabled. Needed to meet settling time constraints.
+                 * @param[in] delayBeforeEnable delay in us before the pin is enabled. Needed to meet settling time constraints.  
+                 * @param[in] delayBeforeDisable delay in us before the pin is disabled. Needed to meet settling time constraints.
                  */
                 void setAddressPin(uint8_t pinNumber, uint8_t pinDriveDirection, uint8_t pinTristateDirection,
                                    uint8_t pinEnableValue, uint8_t pinDisableValue,
-                                   uint32_t delayAfterEnable = 0, uint32_t delayAfterDisable = 0);
+                                   uint32_t delayAfterEnable = 0, uint32_t delayAfterDisable = 0,
+                                   uint32_t delayBeforeEnable = 0, uint32_t delayBeforeDisable = 0);
 
                 /**
                  * @brief The `unsetAddressPin` function disables all actions on the pins set in selectPins that would otherwise be performed by the `init` function.
@@ -184,6 +193,9 @@ namespace ifx {
 
                     uint32_t delayAfterEnable;  /**< the delay in us after the pin is enabled. */
                     uint32_t delayAfterDisable; /**< the delay in us after the pin is disabled. */
+
+                    uint32_t delayBeforeEnable;  /**< the delay in us before the pin is enabled. */
+                    uint32_t delayBeforeDisable; /**< the delay in us before the pin is disabled. */
                     /*@}*/
                 } pinCtrl;
 

@@ -58,7 +58,12 @@ namespace ifx {
 
 
         bool initCommunication(TLx493D_t *sensor, TwoWireWrapper &tw, TLx493D_IICAddressType_t iicAdr, bool executeInit) {
-            sensor->comInterface.comLibObj.iic_obj                = (TLx493D_I2CObject_t *) malloc(sizeof(TLx493D_I2CObject_t));
+            sensor->comInterface.comLibObj.iic_obj = (TLx493D_I2CObject_t *) malloc(sizeof(TLx493D_I2CObject_t));
+
+            if( sensor->comInterface.comLibObj.iic_obj == NULL ) {
+                return( false );
+            }
+
             sensor->comInterface.comLibObj.iic_obj->wire          = &tw;
             sensor->comInterface.comLibObj.iic_obj->isToBeDeleted = false;
 
@@ -74,7 +79,12 @@ namespace ifx {
 
 
         bool initCommunication(TLx493D_t *sensor, TwoWire &tw, TLx493D_IICAddressType_t iicAdr, bool executeInit) {
-            sensor->comInterface.comLibObj.iic_obj                = (TLx493D_I2CObject_t *) malloc(sizeof(TLx493D_I2CObject_t));
+            sensor->comInterface.comLibObj.iic_obj = (TLx493D_I2CObject_t *) malloc(sizeof(TLx493D_I2CObject_t));
+
+            if( sensor->comInterface.comLibObj.iic_obj == NULL ) {
+                return( false );
+            }
+
             sensor->comInterface.comLibObj.iic_obj->wire          = new TwoWireWrapper(tw);
             sensor->comInterface.comLibObj.iic_obj->isToBeDeleted = true;
 
