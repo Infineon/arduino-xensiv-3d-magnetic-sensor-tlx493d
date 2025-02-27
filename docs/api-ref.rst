@@ -35,12 +35,6 @@ The following section shows you all the available logger functions, which can be
    :project: XENSIV™ 3D Magnetic Sensor TLx493D Arduino Library
 .. doxygenfunction:: logPrintln
    :project: XENSIV™ 3D Magnetic Sensor TLx493D Arduino Library
-.. doxygenfunction:: logInfo
-   :project: XENSIV™ 3D Magnetic Sensor TLx493D Arduino Library
-.. doxygenfunction:: logWarn
-   :project: XENSIV™ 3D Magnetic Sensor TLx493D Arduino Library
-.. doxygenfunction:: logError
-   :project: XENSIV™ 3D Magnetic Sensor TLx493D Arduino Library
 .. doxygenfunction:: logFlush
    :project: XENSIV™ 3D Magnetic Sensor TLx493D Arduino Library
 
