@@ -21,11 +21,11 @@ read_the_docs_build = os.environ.get('READTHEDOCS', None) == 'True'
 # -- Project information -----------------------------------------------------
 
 project = 'XENSIV™ 3D Magnetic Sensor TLx493D Arduino Library'
-copyright = '2024, Infineon Technologies AG'
+copyright = '2024-2025, Infineon Technologies AG'
 author = 'Infineon Technologies AG'
 
 # The full version, including alpha/beta/rc tags
-release = '1.0.1'
+release = '1.1.0'
 
 
 # -- General configuration ---------------------------------------------------
