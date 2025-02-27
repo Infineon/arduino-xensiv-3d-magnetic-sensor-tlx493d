@@ -7,7 +7,7 @@
        "url":"https://github.com/Infineon/arduino-xensiv-3d-magnetic-sensor-tlx493d.git",
        "branch":"master"
     },
-    "version":"1.1.0",
+    "version":"1.1.3",
     "license":"MIT",
     "frameworks":"arduino",
     "platforms":[  
