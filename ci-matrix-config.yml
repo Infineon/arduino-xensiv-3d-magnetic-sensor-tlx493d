@@ -3,11 +3,9 @@ include:
 
 exclude:
   # Not enough memory available on these boards
-  - sketch: examples/read_3_different_iic_sensors/read_3_different_iic_sensors.ino
-    fqbn:
-      - arduino:avr:uno
-      - arduino:avr:nano
-  - sketch: examples/read_iic_sensor_c_style/read_iic_sensor_c_style.ino
+  - sketch:
+      - examples/read_3_different_iic_sensors/read_3_different_iic_sensors.ino
+      - examples/read_iic_sensor_c_style/read_iic_sensor_c_style.ino
     fqbn:
       - arduino:avr:uno
       - arduino:avr:nano
