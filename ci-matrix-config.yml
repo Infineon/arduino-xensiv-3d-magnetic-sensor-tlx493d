@@ -1,0 +1,15 @@
+include:
+  - fqbn: esp32:esp32:featheresp32
+
+exclude:
+  # Not enough memory available on these boards
+  - sketch:
+      - examples/read_3_different_iic_sensors/read_3_different_iic_sensors.ino
+      - examples/read_iic_sensor_c_style/read_iic_sensor_c_style.ino
+    fqbn:
+      - arduino:avr:uno
+      - arduino:avr:nano
+      
+additional_urls:
+  - core: esp32:esp32
+    url: https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
