@@ -1,0 +1,15 @@
+name: Build docs
+
+on:
+  push:
+  pull_request:
+    paths:
+      - docs/**
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  makers-devops:
+    uses: Infineon/makers-devops/.github/workflows/docs_build.yml@workflows/docs-add-doxygen
