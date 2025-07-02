@@ -1,6 +1,6 @@
-[![Compile examples](https://github.com/Infineon/arduino-xensiv-3d-magnetic-sensor-tlx493d/actions/workflows/compile_examples.yml/badge.svg)](https://github.com/Infineon/arduino-xensiv-3d-magnetic-sensor-tlx493d/actions/workflows/compile_examples.yml)
-
 # XENSIV™ 3D Magnetic Sensor TLx493D Arduino Library
+
+[![Compile examples](https://github.com/Infineon/arduino-xensiv-3d-magnetic-sensor-tlx493d/actions/workflows/compile_examples.yml/badge.svg)](https://github.com/Infineon/arduino-xensiv-3d-magnetic-sensor-tlx493d/actions/workflows/compile_examples.yml)  [![Build docs](https://github.com/Infineon/arduino-xensiv-3d-magnetic-sensor-tlx493d/actions/workflows/build_docs.yml/badge.svg?branch=devops%2Fadd-build-checks)](https://github.com/Infineon/arduino-xensiv-3d-magnetic-sensor-tlx493d/actions/workflows/build_docs.yml)
 
 Arduino Library of Infineon's [**XENSIV™ 3D Magnetic Sensor TLx493D**](https://www.infineon.com/cms/en/product/sensor/magnetic-sensors/magnetic-position-sensors/3d-magnetics/) family.
 

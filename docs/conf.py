@@ -21,7 +21,7 @@ read_the_docs_build = os.environ.get('READTHEDOCS', None) == 'True'
 
 # -- Project information -----------------------------------------------------
 
-project = 'arduino-xensiv-3d-magnetic-sensor-tlx493d'
+project = 'XENSIV™ 3D Magnetic Sensor TLx493D Arduino Library'
 copyright = '2022 Infineon Technologies AG'
 author = 'Infineon Technologies AG'
 
@@ -112,7 +112,7 @@ html_static_path = ['_templates']
 # -- Breathe configuration -------------------------------------------------
 
 breathe_projects = {
-	"arduino-xensiv-3d-magnetic-sensor-tlx493d": "build/xml/"
+	"XENSIV™ 3D Magnetic Sensor TLx493D Arduino Library": "build/xml/"
 }
-breathe_default_project = "arduino-xensiv-3d-magnetic-sensor-tlx493d"
+breathe_default_project = "XENSIV™ 3D Magnetic Sensor TLx493D Arduino Library"
 breathe_default_members = ('members', 'undoc-members')
