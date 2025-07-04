@@ -1,4 +1,4 @@
-sphinx
+Sphinx
 sphinx-rtd-theme
 sphinx-sitemap
 recommonmark
