@@ -87,6 +87,11 @@ void loop() {
     Serial.print(z);
     Serial.println(" mT");
 
+    Serial.println("WARNING");
+    Serial.println("ERROR");
+    Serial.println("FATAL");
+    Serial.println("fatal");
+
     dut.setSensitivity(TLx493D_SHORT_RANGE_e);
     Serial.print(true == dut.getMagneticFieldAndTemperature(&x, &y, &z, &t) ? "getMagneticFieldAndTemperature ok\n" : "getMagneticFieldAndTemperature error\n");
 
