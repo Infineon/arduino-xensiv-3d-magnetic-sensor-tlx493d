@@ -21,7 +21,8 @@ jobs:
     runs-on: ubuntu-24.04
 
     container:
-      image: docker.io/ifxmakers/makers-docker:latest
+      image: docker.io/ifxmakers/makers-docker:test
+      # image: docker.io/ifxmakers/makers-docker:latest
 
       # image: ghcr.io/infineon/makers-docker:latest
       # credentials:
@@ -88,7 +89,7 @@ jobs:
           echo "matrix.checks   : ${{ matrix.checks }}"
           echo ""
 
-          hilChecks.py --projectYAML "config/project.yml" --userYAML "config/user.yml" --runCheck ${{ matrix.checks }} --dockerTag=latest  2>&1 | tee output.log
+          hilChecks.py --projectYAML "config/project.yml" --userYAML "config/user.yml" --runCheck ${{ matrix.checks }} --dockerTag=test  2>&1 | tee output.log
 
       - name: Archive HIL check reports
         if: success() || failure()
