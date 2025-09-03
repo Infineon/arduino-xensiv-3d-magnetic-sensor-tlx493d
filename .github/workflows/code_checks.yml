@@ -74,7 +74,7 @@ jobs:
           echo "Workflow has these parameters :"
           echo "matrix.checks   : ${{ matrix.checks }}"
           echo ""
-          python3 extras/makers-devops/src/python/code_checks/codeChecks.py --projectYAML "config/project.yml" --userYAML "config/user.yml" --runCheck ${{ matrix.checks }} > output.log
+          python3 extras/makers-devops/src/python/code_checks/codeChecks.py --projectYAML "config/project.yml" --userYAML "config/user.yml" --runCheck ${{ matrix.checks }} | tee output.log
 
       - name: Archive code check reports
         if: success() || failure()
