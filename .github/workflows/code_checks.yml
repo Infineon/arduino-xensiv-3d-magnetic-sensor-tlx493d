@@ -1,0 +1,147 @@
+# =========================================================
+# GitHub Actions Workflow: Code Quality Checks
+# =========================================================
+
+name: Code Quality Checks
+
+on:
+  pull_request:
+  push:
+
+defaults:
+  run:
+    shell: bash
+
+# =========================================================
+# Job: setup
+#   - Prepares the code check matrix
+# =========================================================
+jobs:
+  setup:
+    runs-on: ubuntu-24.04
+    container:
+      image: docker.io/ifxmakers/makers-docker:latest
+      volumes:
+        - .:/myLocalWorkingDir:rw
+      options: --cpus 1
+    steps:
+      - name: Checkout repository (with submodules)
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Set strategy matrix (get all code checks)
+        id: set-matrix
+        run: |
+          eval $(python3 extras/makers-devops/src/python/code_checks/codeChecks.py --projectYAML "config/project.yml" --userYAML "config/user.yml" --getAllCodeChecks)
+
+      - name: Append Code Checks Output to Summary
+        run: |
+          echo "## 📜 Code Quality Report" >> $GITHUB_STEP_SUMMARY
+
+    outputs:
+      checks: ${{ steps.set-matrix.outputs.checks }}
+
+# =========================================================
+# Job: codeChecks
+#   - Runs all code checks in parallel (matrix)
+# =========================================================
+  codeChecks:
+    runs-on: ubuntu-24.04
+    needs: setup
+    container:
+      image: docker.io/ifxmakers/makers-docker:latest
+      volumes:
+        - .:/myLocalWorkingDir:rw
+      options: --cpus 1
+    strategy:
+      fail-fast: false
+      matrix:
+        checks: ${{ fromJson(needs.setup.outputs.checks) }}
+    steps:
+      - name: Checkout repository (recursive submodules)
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-tags: true
+          fetch-depth: 0
+
+      - name: Run code check (${{ matrix.checks }})
+        id: run_build
+        run: |
+          echo "Workflow has these parameters :"
+          echo "matrix.checks   : ${{ matrix.checks }}"
+          echo ""
+          python3 extras/makers-devops/src/python/code_checks/codeChecks.py --projectYAML "config/project.yml" --userYAML "config/user.yml" --runCheck ${{ matrix.checks }} > output.log
+
+      - name: Archive code check reports
+        if: success() || failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.checks }}
+          path: _results
+
+      - name: Append Code Checks Output to Summary
+        if: success() || failure()
+        run: |
+          echo "<details>" >> $GITHUB_STEP_SUMMARY
+          cat output.log >> $GITHUB_STEP_SUMMARY
+          echo "</details>" >> $GITHUB_STEP_SUMMARY
+
+# =========================================================
+# Job: GenerateAndUploadReports
+#   - Collects, generates, and uploads HTML reports
+#   - Deploys to GitHub Pages
+# =========================================================
+  GenerateAndUploadReports:
+    runs-on: ubuntu-24.04
+    if: success() || failure()
+    needs: codeChecks
+    container:
+      image: docker.io/ifxmakers/makers-docker:latest
+      volumes:
+        - .:/myLocalWorkingDir:rw
+      options: --cpus 1
+    steps:
+      - name: Checkout repository (with submodules)
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Download all code check artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: _results
+
+      - name: Normalize tool result directories
+        run: |
+          for d in _results/*/*/; do
+            tool=$(basename "$d")
+            mkdir -p "_results/$tool"
+            shopt -s dotglob nullglob
+            mv "$d"* "_results/$tool/" || true
+          done
+
+      - name: Generate HTML Reports
+        run: |
+          extras/makers-devops/src/python/code_checks/run_generate_reports.sh  --results-dir _results
+
+      - name: Upload HTML report as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: html-report
+          path: _results/html-reports
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: _results/html-reports/source-code-quality
+          keep_files: false
+
+      -  name: Display Report URL in Workflow Summary
+         run: |
+          REPORT_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+          echo "**Code Quality Report Published**" >> $GITHUB_STEP_SUMMARY
+          echo "[View Report Here]($REPORT_URL)" >> $GITHUB_STEP_SUMMARY
+          echo "URL: $REPORT_URL"

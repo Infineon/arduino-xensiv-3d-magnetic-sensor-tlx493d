@@ -7,8 +7,8 @@ compile:
 #     - code-quality-cppcheck
 
 
-# example-test:
-#     - example-test-magnetic-w2b6-xmc100_xmc2go
+example-test:
+    - example-test-magnetic-w2b6-xmc100_xmc2go
 
-unit-test:
-    - unit-test-magnetic-w2b6-xmc100_xmc2go
+# unit-test:
+#     - unit-test-magnetic-w2b6-xmc100_xmc2go
