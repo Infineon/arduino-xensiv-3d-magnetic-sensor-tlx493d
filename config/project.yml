@@ -1,0 +1,144 @@
+# options:
+#   USE_CORE:
+#     name: local
+#     url: https://blabla
+
+# compile:
+#     # build-arduino-wire-XMC4700:
+#     #   description: Compiling test_wire_connected1_pingpong.cpp for XMC4700 platform
+#     #   target: test_wire_connected1_pingpong
+#     #   fqbn: Infineon:xmc:XMC4700_Relax_Kit
+
+#     # build-wire-XMC1100:
+#     #   description: Compiling test_wire_connected2_masterpingpong.cpp for XMC1100 platform
+#     #   target: test_wire_connected2_masterpingpong
+#     #   fqbn: Infineon:xmc:XMC1100_Boot_Kit
+
+#     compile-magnetic-w2b6:
+#       description: Compiling W2B6 unit test for XMC11002Go platform
+#       command: make -f Makefile.arduino.mk FQBN=Infineon:xmc:XMC1100_XMC2GO iic compile
+#       fqbns: 
+#         - Infineon:xmc:XMC1100_XMC2GO
+#         - Infineon:xmc:XMC1100_Boot_Kit        
+#       working_dir: extras/arduino-xensiv-3d-magnetic-sensor-tlx493d
+
+
+# code-quality:
+#     code-quality-clang-tidy:
+#       description: clang-tidy check for wire sources
+#       tool: clang-tidy
+#       command: ./run_clang_tidy.sh --config-file=config/clang-tidy/.clang-tidy -i src/excludes src/c src/cpp
+
+#     code-quality-cppcheck:
+#       description: cppcheck check for wire sources
+#       tool: cppcheck
+#       command: ./run_cppcheck.sh --no-suppress-default src/c/* src/cpp
+
+# code-quality:
+#     code-quality-clang-tidy:
+#       description: clang-tidy check sources
+#       tool: clang-tidy 
+#       command: extras/makers-devops/tools/code_checks/run_clang_tidy.sh -i src/excludes src/cpp/ok.cpp
+
+#     code-quality-cppcheck:
+#       description: cppcheck check sources
+#       tool: cppcheck
+#       command: extras/makers-devops/tools/code_checks/run_cppcheck.sh --no-suppress-default src/c/* src/cpp  
+
+
+# example-test:
+#     example-test-magnetic-w2b6-xmc100_xmc2go:
+#       - description: Compiling, flashing and monitoring W2B6 unit test for XMC11002Go platform.
+#         command: make -f Makefile.arduino.mk iic compile upload
+#         query: description.str.contains('DPS310')
+#         working_dir: extras/arduino-xensiv-3d-magnetic-sensor-tlx493d
+
+#       - description: Compiling, flashing and monitoring W2B6 unit test for XMC11002Go platform.
+#         command: make -f Makefile.arduino.mk iic compile upload
+#         query: tlx493d_w2b6 > 0 and board_type.str.startswith('xmc1100')
+#         working_dir: extras/arduino-xensiv-3d-magnetic-sensor-tlx493d
+#         options:
+#           PARSE_START_TOKEN: Looping ...
+#           PARSE_END_TOKEN: "count : 1"
+
+
+#     example-test-magnetic-w2b6-xmc100_xmc2go-wrong-order:
+#       - description: Compiling, flashing and monitoring W2B6 unit test for XMC11002Go platform.
+#         command: make -f Makefile.arduino.mk iic compile upload
+#         query: tlx493d_w2b6 > 0 and board_type.str.startswith('xmc1100')
+#         working_dir: extras/arduino-xensiv-3d-magnetic-sensor-tlx493d
+#         options:
+#           PARSE_START_TOKEN: Looping ...
+#           PARSE_END_TOKEN: "count : 1"
+
+#       - description: Compiling, flashing and monitoring W2B6 unit test for XMC11002Go platform.
+#         command: make -f Makefile.arduino.mk iic compile upload
+#         query: tlx493d_a2b6 > 0
+#         working_dir: extras/arduino-xensiv-3d-magnetic-sensor-tlx493d
+
+
+#     example-test-dps310-xmc100_xmc2go:
+#       - description: Compiling, flashing and monitoring W2B6 unit test for XMC11002Go platform.
+#         command: make -f Makefile.arduino.mk iic compile upload
+#         query: description.str.contains('DPS310')
+#         working_dir: extras/arduino-xensiv-3d-magnetic-sensor-tlx493d
+
+
+unit-test:
+    unit-test-magnetic-w2b6-xmc100_xmc2go:
+      - description: Compiling, flashing and monitoring W2B6 unit test for XMC11002Go platform.
+        command: make -f Makefile.arduino.mk W2B6_needsSensor
+        query: tlx493d_w2b6 > 0 and board_type.str.startswith('xmc1100')
+        working_dir: extras/arduino-xensiv-3d-magnetic-sensor-tlx493d
+        options:
+          SEND_JOB_START_TOKEN: true
+
+    unit-test-iic-pingpong-1400:
+      - description: Compiling, flashing and monitoring I2C pingpong master unit test.
+        command: make test_wire_connected2_masterpingpong UNITY_PATH=/opt/Unity 
+        query: iic_ping_pong_multiple_boards_master == '1:1'
+        working_dir: extras/arduino-core-tests
+        options:
+          SEND_JOB_START_TOKEN: true
+          # USE_CORE:
+          #  name: local
+
+      - description: Compiling, flashing and monitoring I2C pingpong slave unit test.
+        command: make test_wire_connected2_slavepingpong UNITY_PATH=/opt/Unity 
+        query: iic_ping_pong_multiple_boards_slave == '1:1'
+        working_dir: extras/arduino-core-tests
+        options:
+          SEND_JOB_START_TOKEN: true
+          # USE_CORE:
+          #   name: infineon:psoc6
+          #   url: blabla
+
+
+    unit-test-iic-pingpong-4700:
+      - description: Compiling, flashing and monitoring I2C pingpong master unit test.
+        command: make test_wire_connected2_masterpingpong UNITY_PATH=/opt/Unity 
+        query: iic_ping_pong_multiple_boards_master == '2:1'
+        working_dir: extras/arduino-core-tests
+
+      - description: Compiling, flashing and monitoring I2C pingpong slave unit test.
+        command: make test_wire_connected2_slavepingpong UNITY_PATH=/opt/Unity 
+        query: iic_ping_pong_multiple_boards_slave == '2:1'
+        working_dir: extras/arduino-core-tests
+
+
+    unit-test-iic-pingpong-single:
+      - description: Compiling, flashing and monitoring I2C pingpong master unit test.
+        command: make test_wire_connected2_masterpingpong UNITY_PATH=/opt/Unity 
+        query: iic_ping_pong_single_board_master_slave == '2'
+        working_dir: extras/arduino-core-tests
+
+
+
+
+    unit-test-spi_ping_pong_multiple_boards_slave:
+      - description: Compiling, flashing and monitoring I2C pingpong master unit test.
+        command: make test_wire_connected2_masterpingpong UNITY_PATH=/opt/Unity 
+        query: spi_ping_pong_multiple_boards_slave == "1:1"
+        working_dir: extras/arduino-core-tests
+
+

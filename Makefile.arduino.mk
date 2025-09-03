@@ -1,9 +1,12 @@
 FQBN  ?=
 PORT  ?=
 TESTS ?=
+UNITY_PATH ?=
 
-$(info FQBN : $(FQBN))
-$(info PORT : $(PORT))
+$(info FQBN  : $(FQBN))
+$(info PORT  : $(PORT))
+$(info TESTS : $(TESTS))
+$(info UNITY_PATH : $(UNITY_PATH))
 
 
 TESTS_NEEDS_SENSOR=-DTEST_TLx493D_A1B6_NEEDS_SENSOR \
@@ -113,7 +116,7 @@ iic_with_wakeup: arduino
 
 
 unity: arduino
-	find ../../unity/Unity-master -name '*.[hc]' \( -path '*extras*' -a -path '*src*' -or -path '*src*' -a \! -path '*example*' \) -exec \cp {} build \;
+	find $(UNITY_PATH) -name '*.[hc]' \( -path '*extras*' -a -path '*src*' -or -path '*src*' -a \! -path '*example*' \) -exec \cp {} build \;
 	find test/unit/src -name '*.[hc]*' -a \! -path '*mtb*' -exec \cp {} build \;
 	cp test/unit/src/framework/arduino/Test_main.ino build/build.ino
 
@@ -151,11 +154,7 @@ monitor:
 ifeq ($(PORT),)
 	$(error "Must set variable PORT (Windows port naming convention, ie COM16) in order to be able to flash Arduino sketches !")
 endif
-ifeq ($(FQBN),)
-	$(error "Must set variable FQBN in order to be able to flash Arduino sketches !")
-else
 	arduino-cli.exe monitor -c baudrate=115200 -p $(PORT) --fqbn $(FQBN)
-endif
 
 
 
