@@ -126,7 +126,7 @@ compile:
 ifeq ($(FQBN),)
 	$(error "Must set variable FQBN in order to be able to compile Arduino sketches !")
 else
-	arduino-cli.exe compile --clean --log --warnings all --fqbn $(FQBN) \
+	arduino-cli compile --clean --log --warnings all --fqbn $(FQBN) \
 	                        --build-property compiler.c.extra_flags="\"-DUNITY_INCLUDE_CONFIG_H=1\"" \
 							--build-property compiler.cpp.extra_flags="$(TESTS)" \
 			        build
@@ -143,7 +143,7 @@ endif
 ifeq ($(FQBN),)
 	$(error "Must set variable FQBN in order to be able to flash Arduino sketches !")
 else
-	arduino-cli.exe upload -p $(PORT) --fqbn $(FQBN) build
+	arduino-cli upload -p $(PORT) --fqbn $(FQBN) build
 endif
 
 
@@ -154,17 +154,17 @@ monitor:
 ifeq ($(PORT),)
 	$(error "Must set variable PORT (Windows port naming convention, ie COM16) in order to be able to flash Arduino sketches !")
 endif
-	arduino-cli.exe monitor -c baudrate=115200 -p $(PORT) --fqbn $(FQBN)
+	arduino-cli monitor -c baudrate=115200 -p $(PORT) --fqbn $(FQBN)
 
 
 
 # For WSL and Windows :
-# download arduino-cli.exe from : https://downloads.arduino.cc/arduino-cli/arduino-cli_latest_Windows_64bit.zip
+# download arduino-cli from : https://downloads.arduino.cc/arduino-cli/arduino-cli_latest_Windows_64bit.zip
 prepare:
-	arduino-cli.exe core update-index
-	arduino-cli.exe core install Infineon:xmc
-	arduino-cli.exe core update-index
-	arduino-cli.exe core search Infineon
-	arduino-cli.exe core list
-	arduino-cli.exe board listall
-	arduino-cli.exe board listall Infineon
+	arduino-cli core update-index
+	arduino-cli core install Infineon:xmc
+	arduino-cli core update-index
+	arduino-cli core search Infineon
+	arduino-cli core list
+	arduino-cli board listall
+	arduino-cli board listall Infineon
