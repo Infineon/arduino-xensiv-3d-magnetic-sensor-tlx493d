@@ -4,7 +4,7 @@ options:
   #   url: https://blabla
   #   name: Infineon:xmc:3.5.4
   #   url: https://github.com/Infineon/XMC-for-Arduino/releases/download/3.5.4/package_infineon_index.json
-  SEND_JOB_START_TOKEN: true
+  SEND_JOB_START_TOKEN: false
 
 compile:
     compile-magnetic-w2b6:
