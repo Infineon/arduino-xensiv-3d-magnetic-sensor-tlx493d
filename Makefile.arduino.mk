@@ -80,7 +80,7 @@ EXAMPLES = iic_c_style iic iic_with_wakeup 3iic 3iic_equal iic_ext_addr spi
 
 ### Arduino targets
 clean:
-	-rm -rf build/*
+	-rm -rf build/
 
 
 arduino: clean
