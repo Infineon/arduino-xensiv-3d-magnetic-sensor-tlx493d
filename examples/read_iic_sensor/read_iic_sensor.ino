@@ -138,6 +138,6 @@ void loop() {
         count = 0;
     }
 
-    // This will be the token used as start token in this setup (see project.yml)
+    // This will be the token used as start token in this setup (see project.yml).
     Serial.println("loop done.\n");
 }
