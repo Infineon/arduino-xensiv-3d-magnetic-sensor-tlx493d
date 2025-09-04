@@ -69,6 +69,11 @@ void setup() {
 void loop() {
     double t, x, y, z;
 
+    // Messages of these 3 types are detected and reported: 
+    // Serial.println("WARNING: Dummy warning 1.\n");
+    // Serial.println("ERROR: Dummy error 1.\n");
+    // Serial.println("FATAL: Dummy fatal 1.\n");
+
     dut.setSensitivity(TLx493D_FULL_RANGE_e);
     bool result = dut.getMagneticFieldAndTemperature(&x, &y, &z, &t);
     // Serial.print(true == dut.getMagneticFieldAndTemperature(&x, &y, &z, &t) ? "getMagneticFieldAndTemperature ok\n" : "getMagneticFieldAndTemperature error\n");
@@ -92,9 +97,6 @@ void loop() {
     Serial.print("Value Z is: ");
     Serial.print(z);
     Serial.println(" mT");
-
-    Serial.println("WARNING: Dummy warning 1.\n");
-    Serial.println("ERROR: Dummy error 1.\n");
 
     dut.setSensitivity(TLx493D_SHORT_RANGE_e);
 
