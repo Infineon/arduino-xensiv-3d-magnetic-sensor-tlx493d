@@ -5,9 +5,10 @@ options:
   #   name: Infineon:xmc:3.5.4
   #   url: https://github.com/Infineon/XMC-for-Arduino/releases/download/3.5.4/package_infineon_index.json
   SEND_JOB_START_TOKEN: false
+  PARSER_START_TOKEN: setup done.
   PARSER_END_TOKEN: loop done.
 
-  
+
 compile:
     compile-magnetic-w2b6:
       description: Compiling W2B6 unit test for XMC11002Go platform
