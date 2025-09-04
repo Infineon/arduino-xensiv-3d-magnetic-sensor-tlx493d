@@ -57,7 +57,8 @@ void setup() {
 
     dut.begin();
 
-    Serial.print("11111    setup done.\n");
+    // This will be the token used as start token in this setup (see project.yml)
+    Serial.print("setup done.\n");
 }
 
 
@@ -66,66 +67,75 @@ void setup() {
  *  the serial monitor
  */
 void loop() {
-    // double t, x, y, z;
+    double t, x, y, z;
 
-    // dut.setSensitivity(TLx493D_FULL_RANGE_e);
+    dut.setSensitivity(TLx493D_FULL_RANGE_e);
+    bool result = dut.getMagneticFieldAndTemperature(&x, &y, &z, &t);
     // Serial.print(true == dut.getMagneticFieldAndTemperature(&x, &y, &z, &t) ? "getMagneticFieldAndTemperature ok\n" : "getMagneticFieldAndTemperature error\n");
 
-    // dut.printRegisters();
+    if( !b ) {
+        Serial.println("FATAL: An error occurred, could not get magnetic field values !\n");
+    }
 
-    // Serial.print("\nTemperature is: ");
-    // Serial.print(t);
-    // Serial.println("°C");
+    dut.printRegisters();
 
-    // Serial.print("Value X is: ");
-    // Serial.print(x);
-    // Serial.println(" mT");
-    // Serial.print("Value Y is: ");
-    // Serial.print(y);
-    // Serial.println(" mT");
-    // Serial.print("Value Z is: ");
-    // Serial.print(z);
-    // Serial.println(" mT");
+    Serial.print("\nTemperature is: ");
+    Serial.print(t);
+    Serial.println("°C");
 
-    Serial.println("WARNING\n");
-    Serial.println("ERROR\n");
-    Serial.println("FATAL:\n");
-    Serial.println("fatal\n");
-    Serial.flush();
-    // dut.setSensitivity(TLx493D_SHORT_RANGE_e);
-    // Serial.print(true == dut.getMagneticFieldAndTemperature(&x, &y, &z, &t) ? "getMagneticFieldAndTemperature ok\n" : "getMagneticFieldAndTemperature error\n");
+    Serial.print("Value X is: ");
+    Serial.print(x);
+    Serial.println(" mT");
+    Serial.print("Value Y is: ");
+    Serial.print(y);
+    Serial.println(" mT");
+    Serial.print("Value Z is: ");
+    Serial.print(z);
+    Serial.println(" mT");
 
-    // dut.printRegisters();
+    Serial.println("WARNING: Dummy warning 1.\n");
+    Serial.println("ERROR: Dummy error 1.\n");
 
-    // Serial.print("\nTemperature is: ");
-    // Serial.print(t);
-    // Serial.println("°C");
+    dut.setSensitivity(TLx493D_SHORT_RANGE_e);
 
-    // Serial.print("Value X is: ");
-    // Serial.print(x);
-    // Serial.println(" mT");
-    // Serial.print("Value Y is: ");
-    // Serial.print(y);
-    // Serial.println(" mT");
-    // Serial.print("Value Z is: ");
-    // Serial.print(z);
-    // Serial.println(" mT");
-    // Serial.print("\n\n\n\n");
+    bool result = dut.getMagneticFieldAndTemperature(&x, &y, &z, &t);
+    
+    if( !b ) {
+        Serial.println("FATAL: An error occurred, could not get magnetic field values !\n");
+    }
+
+    dut.printRegisters();
+
+    Serial.print("\nTemperature is: ");
+    Serial.print(t);
+    Serial.println("°C");
+
+    Serial.print("Value X is: ");
+    Serial.print(x);
+    Serial.println(" mT");
+    Serial.print("Value Y is: ");
+    Serial.print(y);
+    Serial.println(" mT");
+    Serial.print("Value Z is: ");
+    Serial.print(z);
+    Serial.println(" mT");
+    Serial.print("\n\n\n\n");
 
     delay(1000);
 
-    // Serial.print("count : ");
-    // Serial.println(count);
+    Serial.print("count : ");
+    Serial.println(count);
 
-    // if( ++count == 4 ) {
-    //     Serial.println("\nBefore reset -------------------------------------------------------------------------------------------------------");
+    if( ++count == 4 ) {
+        Serial.println("\nBefore reset -------------------------------------------------------------------------------------------------------");
 
-    //     /** Reset does not work for W2BW : either drive strength too low or delay to stabilize critical. */
-    //     dut.reset(true, dut.getSensorType() != TLx493D_A1B6_e);
+        /** Reset does not work for W2BW : either drive strength too low or delay to stabilize critical. */
+        dut.reset(true, dut.getSensorType() != TLx493D_A1B6_e);
 
-    //     Serial.println("\nAfter reset -------------------------------------------------------------------------------------------------------");
-    //     count = 0;
-    // }
+        Serial.println("\nAfter reset -------------------------------------------------------------------------------------------------------");
+        count = 0;
+    }
 
-        Serial.println("loop done.\n");
+    // This will be the token used as start token in this setup (see project.yml)
+    Serial.println("loop done.\n");
 }
