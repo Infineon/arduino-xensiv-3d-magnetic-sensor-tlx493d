@@ -89,7 +89,7 @@ void loop() {
 
     Serial.println("WARNING\n");
     Serial.println("ERROR\n");
-    Serial.println("FATAL\n");
+    Serial.println("FATAL:\n");
     Serial.println("fatal\n");
     Serial.flush();
     // dut.setSensitivity(TLx493D_SHORT_RANGE_e);
@@ -126,4 +126,6 @@ void loop() {
     //     Serial.println("\nAfter reset -------------------------------------------------------------------------------------------------------");
     //     count = 0;
     // }
+
+        Serial.println("loop done.\n");
 }
