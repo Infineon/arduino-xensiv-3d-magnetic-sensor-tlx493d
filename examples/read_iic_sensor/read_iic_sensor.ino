@@ -78,7 +78,7 @@ void loop() {
     bool result = dut.getMagneticFieldAndTemperature(&x, &y, &z, &t);
     // Serial.print(true == dut.getMagneticFieldAndTemperature(&x, &y, &z, &t) ? "getMagneticFieldAndTemperature ok\n" : "getMagneticFieldAndTemperature error\n");
 
-    if( !b ) {
+    if( !result ) {
         Serial.println("FATAL: An error occurred, could not get magnetic field values !\n");
     }
 
@@ -100,9 +100,9 @@ void loop() {
 
     dut.setSensitivity(TLx493D_SHORT_RANGE_e);
 
-    bool result = dut.getMagneticFieldAndTemperature(&x, &y, &z, &t);
+    result = dut.getMagneticFieldAndTemperature(&x, &y, &z, &t);
     
-    if( !b ) {
+    if( !result ) {
         Serial.println("FATAL: An error occurred, could not get magnetic field values !\n");
     }
 
