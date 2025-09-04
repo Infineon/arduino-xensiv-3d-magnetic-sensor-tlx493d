@@ -50,10 +50,10 @@ void setup() {
     /** Definition of the power pin to power up the sensor. */
     /** Set delay after power-on to 50 for A1B6 Kit2Go sensor. */
     /** All other Kit2Go boards */
-    // dut.setPowerPin(POWER_PIN, OUTPUT, INPUT, HIGH, LOW, 0, 250000);
+    dut.setPowerPin(POWER_PIN, OUTPUT, INPUT, HIGH, LOW, 0, 250000);
 
-    /** P3XX evaluation board */
-    dut.setPowerPin(POWER_PIN, OUTPUT, INPUT, LOW, HIGH, 1000, 250000);
+    // /** P3XX evaluation board */
+    // dut.setPowerPin(POWER_PIN, OUTPUT, INPUT, LOW, HIGH, 1000, 250000);
 
     dut.begin();
 
