@@ -130,20 +130,20 @@ unity: arduino
 .ONESHELL:
 compile:
 ifneq ($(SENSOR_TYPE),)
-	$(eval SENSOR_TYPE=-DSENSOR_TYPE=$(SENSOR_TYPE))
+	$(eval SENSOR_TYPE_VAR=-DSENSOR_TYPE=$(SENSOR_TYPE))
 endif
 ifneq ($(BOARD_TYPE),)
-	$(eval BOARD_TYPE=-DBOARD_TYPE=$(BOARD_TYPE))
+	$(eval BOARD_TYPE_VAR=-DBOARD_TYPE=$(BOARD_TYPE))
 endif
 
-	echo "$(SENSOR_TYPEV) $(BOARD_TYPEV)"
+	echo "$(SENSOR_TYPE_VAR) $(BOARD_TYPE_VAR)"
 
 ifeq ($(FQBN),)
 	$(error "Must set variable FQBN in order to be able to compile Arduino sketches !")
 else
 	arduino-cli compile --clean --log --warnings all --fqbn $(FQBN) \
 	                        --build-property compiler.c.extra_flags="\"-DUNITY_INCLUDE_CONFIG_H=1\"" \
-							--build-property compiler.cpp.extra_flags="$(TESTS) $(SENSOR_TYPE) $(BOARD_TYPE)" \
+							--build-property compiler.cpp.extra_flags="$(TESTS) $(SENSOR_TYPE_VAR) $(BOARD_TYPE_VAR)" \
 			        build
 
 # 	                        --build-property compiler.c.extra_flags="\"-DUNITY_INCLUDE_CONFIG_H=1\"" \
