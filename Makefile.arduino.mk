@@ -1,9 +1,18 @@
 FQBN  ?=
 PORT  ?=
 TESTS ?=
+UNITY_PATH ?=
 
-$(info FQBN : $(FQBN))
-$(info PORT : $(PORT))
+# These vars are used for example-tests:
+SENSOR_TYPE ?= 
+BOARD_TYPE ?=
+
+$(info FQBN  : $(FQBN))
+$(info PORT  : $(PORT))
+$(info TESTS : $(TESTS))
+$(info UNITY_PATH : $(UNITY_PATH))
+$(info SENSOR_TYPE  : $(SENSOR_TYPE))
+$(info BOARD_TYPE  : $(BOARD_TYPE))
 
 
 TESTS_NEEDS_SENSOR=-DTEST_TLx493D_A1B6_NEEDS_SENSOR \
@@ -77,7 +86,7 @@ EXAMPLES = iic_c_style iic iic_with_wakeup 3iic 3iic_equal iic_ext_addr spi
 
 ### Arduino targets
 clean:
-	-rm -rf build/*
+	-rm -rf build/
 
 
 arduino: clean
@@ -113,19 +122,28 @@ iic_with_wakeup: arduino
 
 
 unity: arduino
-	find ../../unity/Unity-master -name '*.[hc]' \( -path '*extras*' -a -path '*src*' -or -path '*src*' -a \! -path '*example*' \) -exec \cp {} build \;
+	find $(UNITY_PATH) -name '*.[hc]' \( -path '*extras*' -a -path '*src*' -or -path '*src*' -a \! -path '*example*' \) -exec \cp {} build \;
 	find test/unit/src -name '*.[hc]*' -a \! -path '*mtb*' -exec \cp {} build \;
 	cp test/unit/src/framework/arduino/Test_main.ino build/build.ino
 
 
-
+.ONESHELL:
 compile:
+ifneq ($(SENSOR_TYPE),)
+	$(eval SENSOR_TYPE_VAR=-DSENSOR_TYPE=$(SENSOR_TYPE))
+endif
+ifneq ($(BOARD_TYPE),)
+	$(eval BOARD_TYPE_VAR=-DBOARD_TYPE=$(BOARD_TYPE))
+endif
+
+	echo "$(SENSOR_TYPE_VAR) $(BOARD_TYPE_VAR)"
+
 ifeq ($(FQBN),)
 	$(error "Must set variable FQBN in order to be able to compile Arduino sketches !")
 else
-	arduino-cli.exe compile --clean --log --warnings all --fqbn $(FQBN) \
+	arduino-cli compile --clean --log --warnings all --fqbn $(FQBN) \
 	                        --build-property compiler.c.extra_flags="\"-DUNITY_INCLUDE_CONFIG_H=1\"" \
-							--build-property compiler.cpp.extra_flags="$(TESTS)" \
+							--build-property compiler.cpp.extra_flags="$(TESTS) $(SENSOR_TYPE_VAR) $(BOARD_TYPE_VAR)" \
 			        build
 
 # 	                        --build-property compiler.c.extra_flags="\"-DUNITY_INCLUDE_CONFIG_H=1\"" \
@@ -140,7 +158,7 @@ endif
 ifeq ($(FQBN),)
 	$(error "Must set variable FQBN in order to be able to flash Arduino sketches !")
 else
-	arduino-cli.exe upload -p $(PORT) --fqbn $(FQBN) build
+	arduino-cli upload -p $(PORT) --fqbn $(FQBN) build
 endif
 
 
@@ -151,21 +169,17 @@ monitor:
 ifeq ($(PORT),)
 	$(error "Must set variable PORT (Windows port naming convention, ie COM16) in order to be able to flash Arduino sketches !")
 endif
-ifeq ($(FQBN),)
-	$(error "Must set variable FQBN in order to be able to flash Arduino sketches !")
-else
-	arduino-cli.exe monitor -c baudrate=115200 -p $(PORT) --fqbn $(FQBN)
-endif
+	arduino-cli monitor -c baudrate=115200 -p $(PORT) --fqbn $(FQBN)
 
 
 
 # For WSL and Windows :
-# download arduino-cli.exe from : https://downloads.arduino.cc/arduino-cli/arduino-cli_latest_Windows_64bit.zip
+# download arduino-cli from : https://downloads.arduino.cc/arduino-cli/arduino-cli_latest_Windows_64bit.zip
 prepare:
-	arduino-cli.exe core update-index
-	arduino-cli.exe core install Infineon:xmc
-	arduino-cli.exe core update-index
-	arduino-cli.exe core search Infineon
-	arduino-cli.exe core list
-	arduino-cli.exe board listall
-	arduino-cli.exe board listall Infineon
+	arduino-cli core update-index
+	arduino-cli core install Infineon:xmc
+	arduino-cli core update-index
+	arduino-cli core search Infineon
+	arduino-cli core list
+	arduino-cli board listall
+	arduino-cli board listall Infineon
