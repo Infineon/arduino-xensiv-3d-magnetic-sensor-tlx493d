@@ -9,7 +9,7 @@ compile:
 
 example-test:
     # - example-test-magnetic-a2b6-xmc100_xmc2go
-    - example-test-magnetic-w2b6-xmc100_xmc2go
-
+    # - example-test-magnetic-w2b6-xmc100_xmc2go
+    - example-test-magnetic-3iic
 # unit-test:
 #     - unit-test-magnetic-w2b6-xmc100_xmc2go
