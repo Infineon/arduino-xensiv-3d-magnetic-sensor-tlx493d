@@ -125,7 +125,7 @@ void loop() {
 
     delay(1000);
 
-    Serial.print("count : ");
+    Serial.print("count = ");
     Serial.println(count);
 
     if( ++count == 4 ) {
@@ -139,5 +139,5 @@ void loop() {
     }
 
     // This will be the token used as start token in this setup (see project.yml).
-    Serial.println("loop done.\n");
+    // Serial.println("loop done.\n");
 }
