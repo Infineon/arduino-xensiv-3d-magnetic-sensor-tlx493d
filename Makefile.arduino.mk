@@ -130,10 +130,10 @@ unity: arduino
 .ONESHELL:
 compile:
 ifneq ($(SENSOR_TYPE),)
-	$(eval SENSOR_TYPEV=-D$(SENSOR_TYPE))
+	$(eval SENSOR_TYPE=-DSENSOR_TYPE=$(SENSOR_TYPE))
 endif
 ifneq ($(BOARD_TYPE),)
-	$(eval BOARD_TYPEV=-D$(BOARD_TYPE))
+	$(eval BOARD_TYPE=-DBOARD_TYPE=$(BOARD_TYPE))
 endif
 
 	echo "$(SENSOR_TYPEV) $(BOARD_TYPEV)"
@@ -143,7 +143,7 @@ ifeq ($(FQBN),)
 else
 	arduino-cli compile --clean --log --warnings all --fqbn $(FQBN) \
 	                        --build-property compiler.c.extra_flags="\"-DUNITY_INCLUDE_CONFIG_H=1\"" \
-							--build-property compiler.cpp.extra_flags="$(TESTS) $(SENSOR_TYPEV) $(BOARD_TYPEV)" \
+							--build-property compiler.cpp.extra_flags="$(TESTS) $(SENSOR_TYPE) $(BOARD_TYPE)" \
 			        build
 
 # 	                        --build-property compiler.c.extra_flags="\"-DUNITY_INCLUDE_CONFIG_H=1\"" \
