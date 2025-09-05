@@ -3,10 +3,16 @@ PORT  ?=
 TESTS ?=
 UNITY_PATH ?=
 
+# These vars are used for example-tests:
+SENSOR_TYPE ?= 
+BOARD_TYPE ?=
+
 $(info FQBN  : $(FQBN))
 $(info PORT  : $(PORT))
 $(info TESTS : $(TESTS))
 $(info UNITY_PATH : $(UNITY_PATH))
+$(info SENSOR_TYPE  : $(SENSOR_TYPE))
+$(info BOARD_TYPE  : $(BOARD_TYPE))
 
 
 TESTS_NEEDS_SENSOR=-DTEST_TLx493D_A1B6_NEEDS_SENSOR \
@@ -121,14 +127,23 @@ unity: arduino
 	cp test/unit/src/framework/arduino/Test_main.ino build/build.ino
 
 
-
+.ONESHELL:
 compile:
+ifneq ($(SENSOR_TYPE),)
+	$(eval SENSOR_TYPEV=-D$(SENSOR_TYPE))
+endif
+ifneq ($(BOARD_TYPE),)
+	$(eval BOARD_TYPEV=-D$(BOARD_TYPE))
+endif
+
+	echo "$(SENSOR_TYPEV) $(BOARD_TYPEV)"
+
 ifeq ($(FQBN),)
 	$(error "Must set variable FQBN in order to be able to compile Arduino sketches !")
 else
 	arduino-cli compile --clean --log --warnings all --fqbn $(FQBN) \
 	                        --build-property compiler.c.extra_flags="\"-DUNITY_INCLUDE_CONFIG_H=1\"" \
-							--build-property compiler.cpp.extra_flags="$(TESTS)" \
+							--build-property compiler.cpp.extra_flags="$(TESTS) $(SENSOR_TYPEV) $(BOARD_TYPEV)" \
 			        build
 
 # 	                        --build-property compiler.c.extra_flags="\"-DUNITY_INCLUDE_CONFIG_H=1\"" \

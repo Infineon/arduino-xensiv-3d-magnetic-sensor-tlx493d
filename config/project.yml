@@ -35,7 +35,7 @@ compile:
 example-test:
     example-test-magnetic-w2b6-xmc100_xmc2go:
       - description: Compiling, flashing and monitoring W2B6 unit test for XMC11002Go platform.
-        command: make -f Makefile.arduino.mk iic compile upload
+        command: make -f Makefile.arduino.mk iic compile upload SENSOR_TYPE=TLx493D_W2B6 BOARD_TYPE=XMC1100_S2GO
         query: tlx493d_w2b6 > 0
         # query: tlx493d_w2b6 > 0 and board_type.str.startswith('xmc1100')
         working_dir: .

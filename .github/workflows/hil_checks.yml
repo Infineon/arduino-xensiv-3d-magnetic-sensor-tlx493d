@@ -13,8 +13,8 @@ defaults:
   run:
     shell: bash
 
-# permissions:
-#   contents: write
+permissions:
+  contents: read
     
 jobs:
   setup:
