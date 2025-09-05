@@ -5,11 +5,23 @@
 using namespace ifx::tlx493d;
 
 
-#if BOARD_TYPE == XMC1100_S2GO
-    const uint8_t POWER_PIN = 15; // XMC1100 : LED2
+#ifndef BOARD_TYPE
+    const uint8_t POWER_PIN = 15; // XMC1100_S2Go
+#elif BOARD_TYPE == XMC1100_S2GO
+    const uint8_t POWER_PIN = 15; // XMC1100_S2Go
 #elif BOARD_TYPE == XMC4700_RELAX_KIT
-    const uint8_t POWER_PIN = 8; // XMC : P1.10
+    const uint8_t POWER_PIN = 8; // XMC4700
 #endif
+
+
+#ifndef SENSOR_TYPE
+    TLx493D_W2B6 dut(Wire, TLx493D_IIC_ADDR_A0_e);
+#else
+    SENSOR_TYPE dut(Wire, TLx493D_IIC_ADDR_A0_e);
+#endif
+
+
+
 
 
 /* Definition of the power pin and sensor objects for Kit2Go XMC1100 boards. */
@@ -20,8 +32,6 @@ using namespace ifx::tlx493d;
 // TLx493D_A2B6 dut(Wire, TLx493D_IIC_ADDR_A0_e);
 // TLx493D_P2B6 dut(Wire, TLx493D_IIC_ADDR_A0_e);
 // TLx493D_W2B6 dut(Wire, TLx493D_IIC_ADDR_A0_e);
-
-SENSOR_TYPE dut(Wire, TLx493D_IIC_ADDR_A0_e);
 
 
 /** Definition of the power pin and sensor objects for S2Go with XMC4700 Relax Lite board. */
