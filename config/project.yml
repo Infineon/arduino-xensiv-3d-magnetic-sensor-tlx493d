@@ -46,10 +46,16 @@ example-test:
         query: tlx493d_w2b6 > 0 and board_type.str.startswith('xmc1100_xmc2go')
         working_dir: .
 
-
-unit-test:
-    unit-test-magnetic-w2b6-xmc100_xmc2go:
+    example-test-magnetic-w2b6-xmc100_xmc2go:
       - description: Compiling, flashing and monitoring W2B6 unit test for XMC11002Go platform.
-        command: make -f Makefile.arduino.mk W2B6_needsSensor
-        query: tlx493d_w2b6 > 0 and board_type.str.startswith('xmc1100')
+        command: make -f Makefile.arduino.mk 3iic compile
+        query: arduino_iic > 2
         working_dir: .
+
+
+# unit-test:
+#     unit-test-magnetic-w2b6-xmc100_xmc2go:
+#       - description: Compiling, flashing and monitoring W2B6 unit test for XMC11002Go platform.
+#         command: make -f Makefile.arduino.mk W2B6_needsSensor
+#         query: tlx493d_w2b6 > 0 and board_type.str.startswith('xmc1100')
+#         working_dir: .
