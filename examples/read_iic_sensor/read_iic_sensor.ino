@@ -5,9 +5,9 @@
 using namespace ifx::tlx493d;
 
 
-#if BOARD_TYPE == "XMC1100_S2GO"
+#if BOARD_TYPE == XMC1100_S2GO
     const uint8_t POWER_PIN = 15; // XMC1100 : LED2
-#elif BOARD_TYPE == "XMC4700_RELAX_KIT"
+#elif BOARD_TYPE == XMC4700_RELAX_KIT
     const uint8_t POWER_PIN = 8; // XMC : P1.10
 #endif
 
