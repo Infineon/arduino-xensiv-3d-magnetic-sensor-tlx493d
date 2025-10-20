@@ -21,10 +21,11 @@ namespace ifx {
                 using BusType = SPIClass;
                 // typedef SPIClass BusType;
 
-                static constexpr uint8_t TLX493D_SPI_READ_BIT_ON      = 0x80;
+                //static constexpr uint8_t TLX493D_SPI_READ_BIT_ON      = 0x80;
+                //static constexpr uint8_t TLX493D_SPI_READ_BIT_ON      = 0xC0;
                 // static constexpr uint8_t TLX493D_SPI_READ_BIT_OFF     = 0x00;
 
-                // static constexpr uint8_t TLX493D_SPI_AUTO_INC_BIT     = 0x60;
+                 static constexpr uint8_t TLX493D_SPI_AUTO_INC_BIT     = 0xC0;
                 // static constexpr uint8_t TLX493D_SPI_AUTO_INC_BIT_ON  = 0x60;
                 // static constexpr uint8_t TLX493D_SPI_AUTO_INC_BIT_OFF = 0x00;
 
@@ -92,7 +93,7 @@ namespace ifx {
                         spi->transfer(TLX493D_SPI_READ_BIT_ON | readAddress);
 
                         for(; bytesRead < rxLen; ++bytesRead) {
-                            rxBuffer[bytesRead] = spi->transfer(TLX493D_SPI_READ_BIT_ON | readAddress);
+                            rxBuffer[bytesRead] = spi->transfer(0x00);
                         }
 
                         if( bytesRead != rxLen ) {
