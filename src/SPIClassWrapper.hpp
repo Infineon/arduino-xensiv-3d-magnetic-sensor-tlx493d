@@ -95,6 +95,15 @@ namespace ifx {
                         for(; bytesRead < rxLen; ++bytesRead) {
                             rxBuffer[bytesRead] = spi->transfer(0x00);
                         }
+                        
+                        #ifdef ARDUINO_ARCH_PSOC6
+                        uint8_t carryBit = 0;
+                        for(int i = 0; i < rxLen; i++) {
+                            uint8_t nextCarryBit = rxBuffer[i] & 0x01; // Save bit 0 for next byte
+                            rxBuffer[i] = (rxBuffer[i] >> 1) | (carryBit << 7); // Shift right and add carry
+                            carryBit = nextCarryBit;
+                        }
+                        #endif
 
                         if( bytesRead != rxLen ) {
                             return false;
