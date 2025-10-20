@@ -32,12 +32,7 @@ namespace ifx {
 
         static bool initSPI(TLx493D_t *sensor) {
 
-/** TODO: Fix XMCLib SPISettings incompatibilities ! P3I8 will not work for any other platform other than XMCLib ! */
-#ifdef ARDUINO_ARM_XMC      
-
-            sensor->comInterface.comLibObj.spi_obj->spi->init(SPISettings(clockFreq, bitOrder, dataMode));
-
-#endif
+        sensor->comInterface.comLibObj.spi_obj->spi->init(SPISettings(clockFreq, bitOrder, dataMode));
 
             return true;
         }
