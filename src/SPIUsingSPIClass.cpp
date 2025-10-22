@@ -32,7 +32,7 @@ namespace ifx {
 
         static bool initSPI(TLx493D_t *sensor) {
 
-        sensor->comInterface.comLibObj.spi_obj->spi->init(SPISettings(clockFreq, bitOrder, dataMode));
+        sensor->comInterface.comLibObj.spi_obj->spi->init(SPISettings(1000000, MSBFIRST, SPI_MODE2));
 
             return true;
         }
