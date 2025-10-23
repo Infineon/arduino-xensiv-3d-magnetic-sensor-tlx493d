@@ -21,11 +21,11 @@ namespace ifx {
                 using BusType = SPIClass;
                 // typedef SPIClass BusType;
 
-                static constexpr uint8_t TLX493D_SPI_READ_BIT_ON      = 0x80;
-                //static constexpr uint8_t TLX493D_SPI_READ_BIT_ON      = 0xC0;
-                // static constexpr uint8_t TLX493D_SPI_READ_BIT_OFF     = 0x00;
+                static constexpr uint8_t TLX493D_SPI_READ_BIT_ON                 = 0x80;
+                //static constexpr uint8_t TLX493D_SPI_READ_BIT_ON_AND_AUTO_INC  = 0xC0;
+                // static constexpr uint8_t TLX493D_SPI_READ_BIT_OFF             = 0x00;
 
-                static constexpr uint8_t TLX493D_SPI_AUTO_INC_BIT     = 0x40;
+                // static constexpr uint8_t TLX493D_SPI_AUTO_INC_BIT     = 0x40;
                 // static constexpr uint8_t TLX493D_SPI_AUTO_INC_BIT_ON  = 0x60;
                 // static constexpr uint8_t TLX493D_SPI_AUTO_INC_BIT_OFF = 0x00;
 
@@ -91,12 +91,17 @@ namespace ifx {
 
                     if( (rxLen > 0)  && (rxBuffer != NULL) ) {
                         uint16_t bytesRead = 0;
-                        spi->transfer( TLX493D_SPI_READ_BIT_ON | readAddress); //0x80
+                        spi->transfer( TLX493D_SPI_READ_BIT_ON | readAddress); 
 
                         for(; bytesRead < rxLen; ++bytesRead) {
-                            rxBuffer[bytesRead] = spi->transfer(TLX493D_SPI_READ_BIT_ON | readAddress); //0x80
+                            rxBuffer[bytesRead] = spi->transfer(TLX493D_SPI_READ_BIT_ON | readAddress); 
                         }
                         
+                        /*
+                            The following code block shifts the received data back to the left by one bit,
+                            because the PSOC6 AI KIT shifts the data to the right by one bit during reception.
+                        */
+
                         #ifdef ARDUINO_ARCH_PSOC6
                         uint8_t carryBit = 0;
                         for(int i = 0; i < rxLen; i++) {
