@@ -15,8 +15,8 @@ using namespace ifx::tlx493d;
  *  pull-up resistors for all devices are removed and external pull-ups are added to SCL/SDA.
  */
 TLx493D_W2B6 dut1(Wire, TLx493D_IIC_ADDR_A0_e);
-TLx493D_W2B6 dut2(Wire, TLx493D_IIC_ADDR_A0_e);
-TLx493D_W2B6 dut3(Wire, TLx493D_IIC_ADDR_A0_e);
+TLx493D_W2B6 dut2(Wire1, TLx493D_IIC_ADDR_A0_e);
+TLx493D_W2B6 dut3(Wire2, TLx493D_IIC_ADDR_A0_e);
 
 
 void setup() {

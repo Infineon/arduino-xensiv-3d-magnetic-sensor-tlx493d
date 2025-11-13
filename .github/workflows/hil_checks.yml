@@ -1,0 +1,106 @@
+name: HIL Checks
+
+on:
+  pull_request:
+  push:
+
+      # decrypt-secrets:
+      #   required: false
+      #   type: string
+      #   description: 'script for decrypting the secret file that consist of SSID passphrase'
+
+defaults:
+  run:
+    shell: bash
+
+permissions:
+  contents: read
+    
+jobs:
+  setup:
+    runs-on: ubuntu-24.04
+
+    container:
+      image: docker.io/ifxmakers/makers-docker:test
+      # image: docker.io/ifxmakers/makers-docker:latest
+
+      # image: ghcr.io/infineon/makers-docker:latest
+      # credentials:
+      #   username: ${{ github.actor }}
+      #   password: ${{ secrets.github_token }}
+
+      volumes:
+        - .:/myLocalWorkingDir:rw
+      options: --cpus 1
+
+    steps:
+      - name: Checkout repository (with submodules)
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Set strategy matrix (get all hil checks)
+        id: set-matrix
+        run: |
+          eval $(python3 extras/makers-devops/src/python/code_checks/codeChecks.py --projectYAML "config/project.yml" --userYAML "config/user.yml" --getAllHILChecks)
+
+      - name: Append HIL Checks Output to Summary
+        run: |
+          echo "## 📜 Test Quality Report" >> $GITHUB_STEP_SUMMARY
+
+    outputs:
+      checks: ${{ steps.set-matrix.outputs.checks }}
+      decrypt-secrets: ${{ inputs.decrypt-secrets }}
+      
+
+  hilChecks:
+    runs-on:
+      - self-hosted
+      - X64
+      - Linux
+    needs: setup
+
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+
+      matrix:
+        checks: ${{ fromJson(needs.setup.outputs.checks) }}
+
+    steps:
+      - name: Checkout repository (recursive submodules)
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          fetch-tags: true
+          fetch-depth: 0
+
+      - name: Decrypt secret file that consists of SSID passphrase
+        if: ${{ needs.setup.outputs.decrypt-secrets != '' }}
+        run: |
+          ${{ needs.setup.outputs.decrypt-secrets }}
+        env:
+          LARGE_SECRET_PASSPHRASE: ${{ secrets.LARGE_SECRET_PASSPHRASE }}
+
+      - name: Run HIL check (${{ matrix.checks }})
+        id: run_build
+        run: |
+          echo "Workflow has these parameters :"
+          echo "matrix.checks   : ${{ matrix.checks }}"
+          echo ""
+
+          hilChecks.py --projectYAML "config/project.yml" --userYAML "config/user.yml" --runCheck ${{ matrix.checks }} --dockerTag=test  2>&1 | tee output.log
+
+      - name: Archive HIL check reports
+        if: success() || failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.checks }}
+          path: _results
+
+      - name: Append HIL checks output to summary
+        if: success() || failure()
+        run: |
+          echo "<details>" >> $GITHUB_STEP_SUMMARY
+          cat output.log >> $GITHUB_STEP_SUMMARY
+          echo "</details>" >> $GITHUB_STEP_SUMMARY

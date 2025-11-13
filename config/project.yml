@@ -1,0 +1,60 @@
+options:
+  # USE_CORE:
+  #   name: local
+  #   url: https://blabla
+  #   name: Infineon:xmc:3.5.4
+  #   url: https://github.com/Infineon/XMC-for-Arduino/releases/download/3.5.4/package_infineon_index.json
+  SEND_JOB_START_TOKEN: false
+  PARSER_START_TOKEN: setup done.
+  PARSER_END_TOKEN: count = 3
+  # PARSER_END_TOKEN: loop done.
+
+
+compile:
+    compile-magnetic-w2b6:
+      description: Compiling W2B6 unit test for XMC11002Go platform
+      command: make -f Makefile.arduino.mk iic compile
+      fqbns: 
+        - Infineon:xmc:XMC1100_XMC2GO
+        - Infineon:xmc:XMC1100_Boot_Kit        
+      working_dir: .
+
+
+# code-quality:
+#     code-quality-clang-tidy:
+#       description: clang-tidy check sources
+#       tool: clang-tidy 
+#       command: extras/makers-devops/tools/code_checks/run_clang_tidy.sh -i src/excludes src/cpp/ok.cpp
+
+#     code-quality-cppcheck:
+#       description: cppcheck check sources
+#       tool: cppcheck
+#       command: extras/makers-devops/tools/code_checks/run_cppcheck.sh --no-suppress-default src/c/* src/cpp  
+
+
+example-test:
+    # example-test-magnetic-a2b6-xmc100_xmc2go:
+    #   - description: Compiling, flashing and monitoring W2B6 unit test for XMC11002Go platform.
+    #     command: make -f Makefile.arduino.mk iic compile upload SENSOR_TYPE=TLx493D_A2B6 BOARD_TYPE=XMC1100_S2GO
+    #     query: tlx493d_a2b6 > 0 and board_type.str.startswith('xmc1100_xmc2go')
+    #     working_dir: .
+
+    # example-test-magnetic-w2b6-xmc100_xmc2go:
+    #   - description: Compiling, flashing and monitoring W2B6 unit test for XMC11002Go platform.
+    #     command: make -f Makefile.arduino.mk iic compile upload SENSOR_TYPE=TLx493D_W2B6 BOARD_TYPE=XMC1100_S2GO
+    #     query: tlx493d_w2b6 > 0 and board_type.str.startswith('xmc1100_xmc2go')
+    #     working_dir: .
+
+    example-test-magnetic-3iic:
+      - description: Compiling, flashing and monitoring W2B6 unit test for XMC11002Go platform.
+        command: make -f Makefile.arduino.mk 3iic compile
+        query: arduino_iic > 2
+        working_dir: .
+
+
+# unit-test:
+#     unit-test-magnetic-w2b6-xmc100_xmc2go:
+#       - description: Compiling, flashing and monitoring W2B6 unit test for XMC11002Go platform.
+#         command: make -f Makefile.arduino.mk W2B6_needsSensor
+#         query: tlx493d_w2b6 > 0 and board_type.str.startswith('xmc1100')
+#         working_dir: .

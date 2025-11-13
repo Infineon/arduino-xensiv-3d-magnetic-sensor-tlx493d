@@ -5,6 +5,25 @@
 using namespace ifx::tlx493d;
 
 
+#ifndef BOARD_TYPE
+    const uint8_t POWER_PIN = 15; // XMC1100_S2Go
+#elif BOARD_TYPE == XMC1100_S2GO
+    const uint8_t POWER_PIN = 15; // XMC1100_S2Go
+#elif BOARD_TYPE == XMC4700_RELAX_KIT
+    const uint8_t POWER_PIN = 8; // XMC4700
+#endif
+
+
+#ifndef SENSOR_TYPE
+    TLx493D_W2B6 dut(Wire, TLx493D_IIC_ADDR_A0_e);
+#else
+    SENSOR_TYPE dut(Wire, TLx493D_IIC_ADDR_A0_e);
+#endif
+
+
+
+
+
 /* Definition of the power pin and sensor objects for Kit2Go XMC1100 boards. */
 // const uint8_t POWER_PIN = 15; // XMC1100 : LED2
 
@@ -26,8 +45,8 @@ using namespace ifx::tlx493d;
 
 
 /** P3XX evaluation board */
-const uint8_t POWER_PIN = 8;
-TLx493D_P3B6 dut(Wire, TLx493D_IIC_ADDR_A0_e);
+// const uint8_t POWER_PIN = 8;
+// TLx493D_P3B6 dut(Wire, TLx493D_IIC_ADDR_A0_e);
 
 
 /** Definition of the power pin and sensor objects for Arduino Uno boards */
@@ -50,13 +69,14 @@ void setup() {
     /** Definition of the power pin to power up the sensor. */
     /** Set delay after power-on to 50 for A1B6 Kit2Go sensor. */
     /** All other Kit2Go boards */
-    // dut.setPowerPin(POWER_PIN, OUTPUT, INPUT, HIGH, LOW, 0, 250000);
+    dut.setPowerPin(POWER_PIN, OUTPUT, INPUT, HIGH, LOW, 0, 250000);
 
-    /** P3XX evaluation board */
-    dut.setPowerPin(POWER_PIN, OUTPUT, INPUT, LOW, HIGH, 1000, 250000);
+    // /** P3XX evaluation board */
+    // dut.setPowerPin(POWER_PIN, OUTPUT, INPUT, LOW, HIGH, 1000, 250000);
 
     dut.begin();
 
+    // This will be the token used as start token in this setup (see project.yml)
     Serial.print("setup done.\n");
 }
 
@@ -68,8 +88,18 @@ void setup() {
 void loop() {
     double t, x, y, z;
 
+    // Messages of these 3 types are detected and reported: 
+    // Serial.println("WARNING: Dummy warning 1.\n");
+    // Serial.println("ERROR: Dummy error 1.\n");
+    // Serial.println("FATAL: Dummy fatal 1.\n");
+
     dut.setSensitivity(TLx493D_FULL_RANGE_e);
-    Serial.print(true == dut.getMagneticFieldAndTemperature(&x, &y, &z, &t) ? "getMagneticFieldAndTemperature ok\n" : "getMagneticFieldAndTemperature error\n");
+    bool result = dut.getMagneticFieldAndTemperature(&x, &y, &z, &t);
+    // Serial.print(true == dut.getMagneticFieldAndTemperature(&x, &y, &z, &t) ? "getMagneticFieldAndTemperature ok\n" : "getMagneticFieldAndTemperature error\n");
+
+    if( !result ) {
+        Serial.println("FATAL: An error occurred, could not get magnetic field values !\n");
+    }
 
     dut.printRegisters();
 
@@ -88,7 +118,12 @@ void loop() {
     Serial.println(" mT");
 
     dut.setSensitivity(TLx493D_SHORT_RANGE_e);
-    Serial.print(true == dut.getMagneticFieldAndTemperature(&x, &y, &z, &t) ? "getMagneticFieldAndTemperature ok\n" : "getMagneticFieldAndTemperature error\n");
+
+    result = dut.getMagneticFieldAndTemperature(&x, &y, &z, &t);
+    
+    if( !result ) {
+        Serial.println("FATAL: An error occurred, could not get magnetic field values !\n");
+    }
 
     dut.printRegisters();
 
@@ -109,7 +144,7 @@ void loop() {
 
     delay(1000);
 
-    Serial.print("count : ");
+    Serial.print("count = ");
     Serial.println(count);
 
     if( ++count == 4 ) {
@@ -121,4 +156,7 @@ void loop() {
         Serial.println("\nAfter reset -------------------------------------------------------------------------------------------------------");
         count = 0;
     }
+
+    // This will be the token used as start token in this setup (see project.yml).
+    // Serial.println("loop done.\n");
 }
