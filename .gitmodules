@@ -1,0 +1,6 @@
+[submodule "extras/xensiv-3d-magnetic-sensor-tlx493d"]
+	path = extras/xensiv-3d-magnetic-sensor-tlx493d
+	url = https://github.com/Infineon/xensiv-3d-magnetic-sensor-tlx493d.git
+[submodule "extras/arduino-devops"]
+	path = extras/arduino-devops
+	url = https://github.com/Infineon/arduino-devops
