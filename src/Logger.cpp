@@ -18,8 +18,8 @@
 #include <Arduino.h>
 
 /** project c includes. */
-#include "tlx493d_types.h"
-#include "Logger.h"
+#include "corelib/tlx493d_types.h"
+#include "corelib/Logger.h"
 
 
 const uint16_t LOGGER_BUFFER_SIZE = 512U;

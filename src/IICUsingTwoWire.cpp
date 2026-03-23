@@ -14,12 +14,12 @@
 
 
 /** project c includes. */
-#include "tlx493d_types.h"
+#include "corelib/tlx493d_types.h"
 
 /** project cpp includes. */
 #include "types.hpp"
 #include "IICUsingTwoWire.hpp"
-#include "Logger.h"
+#include "corelib/Logger.h"
 
 
 namespace ifx {

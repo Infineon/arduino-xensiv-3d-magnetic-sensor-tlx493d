@@ -11,10 +11,10 @@
 
 
 /** project cpp includes. */
-#include "CommunicationInterface.h"
+#include "corelib/CommunicationInterface.h"
 
 /** project c includes. */
-#include "tlx493d_types.h"
+#include "corelib/tlx493d_types.h"
 
 
 extern "C" bool tlx493d_transfer(TLx493D_t *sensor, uint8_t *txBuffer, uint8_t txLen, uint8_t *rxBuffer, uint8_t rxLen) {

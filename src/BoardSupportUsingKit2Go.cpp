@@ -14,7 +14,7 @@
 
 
 /** project c includes. */
-#include "tlx493d_types.h"
+#include "corelib/tlx493d_types.h"
 
 /** project cpp includes. */
 #include "types.hpp"
