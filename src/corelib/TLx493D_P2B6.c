@@ -266,7 +266,7 @@ bool TLx493D_P2B6_setIICAddress(TLx493D_t *sensor, TLx493D_IICAddressType_t addr
 
 
 bool TLx493D_P2B6_enable1ByteReadMode(TLx493D_t *sensor) {
-    return tlx493d_gen_2_set1ByteReadMode(sensor, P2B6_PR_e, P2B6_FP_e, P2B6_PRD_e, 1);
+    return tlx493d_gen_2_set1ByteReadMode(sensor, P2B6_IICADR_e, P2B6_PR_e, P2B6_FP_e, P2B6_PRD_e, 1);
 }
 
 

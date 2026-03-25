@@ -15,7 +15,7 @@
 #include "tlx493d_gen_3_common_defines.h"
 #include "tlx493d_gen_3_common.h"
 
-/** sensor specicifc includes. */
+/** sensor specific includes. */
 #include "TLx493D_P3B6_defines.h"
 #include "TLx493D_P3B6_enums.h"
 #include "TLx493D_P3B6.h"

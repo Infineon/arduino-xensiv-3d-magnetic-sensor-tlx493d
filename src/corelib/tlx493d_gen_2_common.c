@@ -210,7 +210,29 @@ bool tlx493d_gen_2_setIICAddress(TLx493D_t *sensor, uint8_t iicadrBF, uint8_t fp
 }
 
 
-bool tlx493d_gen_2_set1ByteReadMode(TLx493D_t *sensor, uint8_t prBF, uint8_t fpBF, uint8_t prdBF, uint8_t pr) {
+bool tlx493d_gen_2_set1ByteReadMode(TLx493D_t *sensor, uint8_t iicadrBF, uint8_t prBF, uint8_t fpBF, uint8_t prdBF, uint8_t pr) {
+    switch (sensor->comInterface.comLibParams.iic_params.address) {
+        case GEN_2_STD_IIC_ADDR_WRITE_A0 : 
+            tlx493d_common_setBitfield(sensor, iicadrBF, 0x00);
+            break;
+
+        case GEN_2_STD_IIC_ADDR_WRITE_A1 : 
+            tlx493d_common_setBitfield(sensor, iicadrBF, 0x01);
+            break;
+
+        case GEN_2_STD_IIC_ADDR_WRITE_A2 : 
+            tlx493d_common_setBitfield(sensor, iicadrBF, 0x02);
+            break;
+
+        case GEN_2_STD_IIC_ADDR_WRITE_A3: 
+            tlx493d_common_setBitfield(sensor, iicadrBF, 0x03);
+            break;
+
+        default :
+            logError("Current IIC address does not match any of the possible IIC addresses of the sensor generation !");
+            return false;
+    }
+
     tlx493d_common_setBitfield(sensor, prBF, pr);
     tlx493d_common_setBitfield(sensor, fpBF, tlx493d_gen_2_calculateFuseParity(sensor, fpBF, prdBF));
 

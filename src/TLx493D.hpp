@@ -24,10 +24,10 @@
 #include "TLx493DBase.hpp"
 
 /** project c includes. */
-#include "tlx493d_types.h"
-#include "tlx493d.h"
-#include "CommunicationInterface.h"
-#include "Logger.h"
+#include "corelib/tlx493d_types.h"
+#include "corelib/tlx493d.h"
+#include "corelib/CommunicationInterface.h"
+#include "corelib/Logger.h"
 
 
 namespace ifx {

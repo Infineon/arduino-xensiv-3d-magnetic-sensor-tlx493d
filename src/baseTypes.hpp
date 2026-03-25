@@ -3,7 +3,7 @@
 
 
 /** project cpp includes. */
-#include "Kit2GoBoardSupport.hpp"
+#include "corelib/Kit2GoBoardSupport.hpp"
 #include "SPIClassWrapper.hpp"
 #include "TwoWireWrapper.hpp"
 
